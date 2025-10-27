@@ -1,2 +1,2 @@
 plugins { application }
-application { mainClass.set("edu.utexas.ece.parallel.examples.Main") } // placeholder
+application { mainClass.set("edu.utexas.ece.examples.Main") } // placeholder

@@ -6,7 +6,6 @@
     - The order on the lattice is based on the optimization objective of the problem.
 - Step 2: 
     - Define the feasibility predicate B. An element is feasible if it satisfies constraints of the problem
-    - Forbidden State?
 - Step 3: 
     - Check whether the feasibility predicate B is Lattice-Linear
     - If B is lattice-linear, LLP Algorithm will return the optimal feasible solution.
@@ -37,16 +36,20 @@ def get_least_feasible(T: vector, B: predicate)
     return G ; # the optimal solution
 ```
 
-### 1.2 Assignment 
-- Java Library/API that allows one to use LLP parallel algorithms to solve problems. 
-- source
-- program to generate testcases
-- script that runs the program (tests below algorithms)
+### 1.2 Task List 
+
+[...] Java Library/API that allows one to use LLP parallel algorithms to solve problems. 
+[ ] source
+[ ] program to generate testcases
+[ ] script that runs the program (tests below algorithms)
 
 #### 1.2.1 Low Level Design
 - Note: Work in progress
 
 ```uml
++ class LLPParallelSolver
+    + <T> solve(m: LLP<T>): Vector<T>
+
 + interface LLP<T>
     + G(): Vector<T>                                    // global state vector 
     + T(): Vector<T>                                    // top elem of lattice         
