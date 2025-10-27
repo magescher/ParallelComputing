@@ -49,7 +49,7 @@ def get_least_feasible(T: vector, B: predicate)
 - script that runs the program (tests below algorithms)
 
 #### Low Level Design
-Note: Work in progress
+- Note: Work in progress
 ```uml
 + class LLP
     + G: # global state vector of reals initially ∀i : G [i] = 0;
