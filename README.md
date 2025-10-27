@@ -53,9 +53,10 @@ def get_least_feasible(T: vector, B: predicate)
 ```uml
 + interface LLPModule<T>
     + G(): Vector<T>                  // global state vector 
+    + T                               // top elem of lattice
     + B(): Predicate<T>               // feasibility predicate on global state
     + init(): void                    // initialize global state G
-    + always(): void                  // recompute derived variables/macros
+    + always(): void                  // recompute derived variables/macros (this doesn't seem to be used in our ex)
     + forbidden(): Forbidden<T>       // identifies indices violating B (or boolean yes/no?)
     + advance(): Advance<T>           // computes least monotone fix (G, j)
     + ensure(): EnsureSpec<T>[]       // monotone constraints (optional)
