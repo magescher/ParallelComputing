@@ -32,7 +32,7 @@ public interface LLP<T> {
     boolean isForbidden(int j);
 
     /**
-     * Computes the least monotone fix α(G, j) for component j.
+     * Computes the least monotone fix (G, j) for component j.
      */
     T advance(int j);
 
