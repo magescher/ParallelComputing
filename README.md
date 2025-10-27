@@ -96,7 +96,7 @@ Note: Work in progress
 
 - Init: parent[j] = j
 - Ensure 1: parent[j] = parent[ parent[j] ]
-- Ensure 2: parent[j] >= max{parent[i] | for all (i,j) included in E}
+- Ensure 2: parent[j] >= max{ parent[i] | for all (i,j) included in E }
 
 ##### Minimum Spanning Tree
 - Algorithm: Boruvka
