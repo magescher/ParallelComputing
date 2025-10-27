@@ -38,10 +38,10 @@ def get_least_feasible(T: vector, B: predicate)
 
 ### 1.2 Task List 
 
-[...] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
-[ ] source. 
-[ ] program to generate testcases. 
-[ ] script that runs the program (tests below algorithms). 
+- [...] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
+- [...] source. 
+- [ ] program to generate testcases. 
+- [ ] script that runs the program (tests below algorithms). 
 
 #### 1.2.1 Low Level Design
 - Note: Work in progress
