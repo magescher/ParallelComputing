@@ -1,2 +1,3 @@
 plugins { application }
-application { mainClass.set("edu.utexas.ece.examples.MainShortestPathDemo") } // placeholder
+dependencies { implementation(project(":libs:graph")) }
+application { mainClass.set("edu.utexas.ece.examples.MainShortestPathDemo") }
