@@ -47,33 +47,28 @@ def get_least_feasible(T: vector, B: predicate)
 - Note: Work in progress
 
 ```uml
-
-# Some open questions/uncertainty 
 + interface LLP<T>
-    + G(): Vector<T>                  // global state vector 
-    + T                               // top elem of lattice         
-    + init(): void                    // initialize global state G
-    + always(): void                  // recompute derived variables/macros 
+    + G(): Vector<T>                                    // global state vector 
+    + T(): Vector<T>                                    // top elem of lattice         
+    + init(): void                                      // initialize global state G
+    + always(): void                                    // recompute derived variables/macros 
     + isForbidden(j: int): boolean
-    + isFeasible(): boolean           // true if no index j is forbidden
     + advance(j: int): T
-    + ensure(): <?>                   // ? 
-    + isFeasible(): boolean           // true if no index j is forbidden
+    + ensure(): <?>                                     // ? 
 
 + class Graph
-    + Graph 
-    + isDirected
-    + ... ?
-    // -----------
-    + getShortestPath():          // Johnson's w/ negative Cycles, Bellman-ford without. 
-    + getConnectedComponents():    // Fast CC LLP
-    + getMinSpanningTree( ):       // Boruvka LLP
-    + getStablePairing( ):               // Stable Marriage
+    + isDirected: boolean
+    + V(): int
+    + out(u: int): Iterable<int>
+    + weight(u: int, v: int): double?                   // null if no edge
+    + addEdge(u: int, v: int, w: double = 1.0): void
+
++ class GraphOps
+    + shortestPath(g: Graph, s: int): double[]          // Bellman-Ford (LLP) or Johnson (LLP)
+    + connectedComponents(g: Graph): int[]              // Fast CC (LLP)
+    + minimumSpanningTree(g: Graph): Edge[]             // Boruka (LLP)
 
 ```
-
-
-
 
 #### 1.2.2 Applications
 
