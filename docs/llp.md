@@ -1,49 +1,11 @@
-### 1.1 Notes
-- Step 1: 
-    - Model the underlying search space - a distributive lattice of state vectors. 
-        - Global State Vector where G [i] is the component for process i.
-        - The choice for a single process is total ordered
-    - The order on the lattice is based on the optimization objective of the problem.
-- Step 2: 
-    - Define the feasibility predicate B. An element is feasible if it satisfies constraints of the problem
-- Step 3: 
-    - Check whether the feasibility predicate B is Lattice-Linear
-    - If B is lattice-linear, LLP Algorithm will return the optimal feasible solution.
-
-- Finding an element in the lattice that sarifies the given predicate B is called predicate detection problem. 
-- Find the minimum element thtat satisfies B (whenever it exists) is the combinatorial optimization problem
-- Lattice linearity enables the efficient computtation of this minimum ellement
-- A key element in the development of an efficient predicate detection algirthm is that of forbidden state: something being false in G implies G contains a forbidden state 
-
-3 Sections:
-+ init 
-+ always 
-    + defines addition variables derived from G; can be seen as macros
-+ Predicate: 
-    + forbidden & advance
-    + ensure //use when expression in a monotonic function of G
-
-- Solve:
-From notes:
-```python
-def get_least_feasible(T: vector, B: predicate)
-    T; # top element of the lattice
-    G; # vector of reals initially ∀i : G [i] = 0;
-    while ∃j: forbidden(G, j, B) do
-        for all j such that forbidden(G, j, B) in parallel:
-            if α(G, j, B) > T[j]: return None 
-            else G[j] := α(G , j, B)
-    return G ; # the optimal solution
-```
-
-### 1.2 Task List 
+### Task List 
 
 - [...] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
 - [...] source. 
 - [ ] program to generate testcases. 
 - [ ] script that runs the program (tests below algorithms). 
 
-#### 1.2.1 Low Level Design
+#### Low Level Design
 - Note: Work in progress
 
 ```uml
@@ -73,7 +35,7 @@ def get_least_feasible(T: vector, B: predicate)
 
 ```
 
-#### 1.2.2 Applications
+#### Applications
 
 ##### Parallel Prefix 
 - TODO 
@@ -117,3 +79,44 @@ def get_least_feasible(T: vector, B: predicate)
 - Algorithm: Boruvka
 
 - TODO
+
+----------------------
+Notes
+----------------------
+
+- Step 1: 
+    - Model the underlying search space - a distributive lattice of state vectors. 
+        - Global State Vector where G [i] is the component for process i.
+        - The choice for a single process is total ordered
+    - The order on the lattice is based on the optimization objective of the problem.
+- Step 2: 
+    - Define the feasibility predicate B. An element is feasible if it satisfies constraints of the problem
+- Step 3: 
+    - Check whether the feasibility predicate B is Lattice-Linear
+    - If B is lattice-linear, LLP Algorithm will return the optimal feasible solution.
+
+- Finding an element in the lattice that sarifies the given predicate B is called predicate detection problem. 
+- Find the minimum element thtat satisfies B (whenever it exists) is the combinatorial optimization problem
+- Lattice linearity enables the efficient computtation of this minimum ellement
+- A key element in the development of an efficient predicate detection algirthm is that of forbidden state: something being false in G implies G contains a forbidden state 
+
+3 Sections:
++ init 
++ always 
+    + defines addition variables derived from G; can be seen as macros
++ Predicate: 
+    + forbidden & advance
+    + ensure //use when expression in a monotonic function of G
+
+- Solve:
+From notes:
+```python
+def get_least_feasible(T: vector, B: predicate)
+    T; # top element of the lattice
+    G; # vector of reals initially ∀i : G [i] = 0;
+    while ∃j: forbidden(G, j, B) do
+        for all j such that forbidden(G, j, B) in parallel:
+            if α(G, j, B) > T[j]: return None 
+            else G[j] := α(G , j, B)
+    return G ; # the optimal solution
+```
