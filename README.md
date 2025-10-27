@@ -10,6 +10,13 @@ Collection of multi-core and multi-process libraries and exercises.
 ./gradlew clean build
 ```
 
-- TODO: Add other example usage (run, test, build, etc. )
-```bash```
+- Run 
+```bash
+TODO
+```
+
+- Test 
+```bash
+TODO
+```
 
