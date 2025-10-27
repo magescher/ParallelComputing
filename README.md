@@ -1,9 +1,9 @@
 # Parallel Computing
 Collection of multi-core and multi-process libraries and exercises. 
 
-## LLP 
+## 1.0 LLP 
 
-### Overview / Algorithm
+### 1.1 Overview / Algorithm
 - Step 1: 
     - Model the underlying search space - a distributive lattice of state vectors. 
         - Global State Vector where G [i] is the component for process i.
@@ -42,13 +42,13 @@ def get_least_feasible(T: vector, B: predicate)
     return G ; # the optimal solution
 ```
 
-### Assignment 
+### 1.2 Assignment 
 - Java Library/API that allows one to use LLP parallel algorithms to solve problems. 
 - source
 - program to generate testcases
 - script that runs the program (tests below algorithms)
 
-#### Low Level Design
+#### 1.2.1 Low Level Design
 - Note: Work in progress
 ```uml
 + class LLP
@@ -58,7 +58,7 @@ def get_least_feasible(T: vector, B: predicate)
     + getLeastFeasible(T: vector, B: predicate) // solver
 ```
 
-#### Applications
+#### 1.2.2 Applications
 
 ##### Parallel Prefix 
 - TODO 
