@@ -67,10 +67,12 @@ Note: Work in progress
 - Input: ordered preferences of n men and n women
 - Output: Man-optimal stable marriage
 
-G[i]: index in the preference list for man i; initially 1 // top choice
-Every man must be matched to a different woman and there must not be any blocking pair. For any man j, let
-z = mpref[j][G[j]]; //current woman assigned to man j
-¬∃i : ∃k ≤ G [i]: (z = mpref[i][k]) ∧ (rank[z][i] < rank[z][j]))
+- Note: Pj: Code for thread j
+- Input: mpref[i,k]: int for all i,k; rank[k][i]: int for all k,i; I: array[1...n][1...n]: int // init vector
+- Init: G[j] = i[j] // works for any init 
+- Always: z = mpref[ j ][ G[j] ]
+- Forbidden: ∃i : ∃k ≤ G [i]: (z = mpref[i][k]) ∧ (rank[z][i] < rank[z][j]))
+    - Advance: G[j] = G[j] + 1
 
 ##### Shortest Path (no negative cycles)
 - Algorithm: Bellman-Ford
@@ -84,7 +86,7 @@ z = mpref[j][G[j]]; //current woman assigned to man j
 ##### Shortest path (w/ negative cycles)
 - Algorithm: Johnson (finding min price vector)
 
-w'[i,j] = w[i,j] + p[i] - p[j] // where prices >= 0 all w' >= 0
+- w'[i,j] = w[i,j] + p[i] - p[j] // where prices >= 0 all w' >= 0
 - Input: pre(j) : list of 1...n : w[i][j] for all i in pre(j)
 - Init: p[j] = 0 for all j; w[i][j] for all i in pre(j)
 - Ensure: p[j] >= max { p[i] - w[i,j] for i included inpre(j) }
@@ -98,4 +100,5 @@ w'[i,j] = w[i,j] + p[i] - p[j] // where prices >= 0 all w' >= 0
 
 ##### Minimum Spanning Tree
 - Algorithm: Boruvka
+
 - TODO
