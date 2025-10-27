@@ -51,13 +51,13 @@ def get_least_feasible(T: vector, B: predicate)
 # Some open questions/uncertainty 
 + interface LLP<T>
     + G(): Vector<T>                  // global state vector 
-    + T                               // top elem of lattice
-    + B(): Predicate<T>               // <Q: How to model> feasibility predicate on global state
+    + T                               // top elem of lattice         
     + init(): void                    // initialize global state G
     + always(): void                  // recompute derived variables/macros 
-    + forbidden(): Forbidden<T>       // identifies indices violating B (or boolean yes/no?)
-    + advance(): Advance<T>           // computes least monotone fix (G, j)
-    + ensure(): <?>                   // monotone constraints 
+    + isForbidden(j: int): boolean
+    + isFeasible(): boolean           // true if no index j is forbidden
+    + advance(j: int): T
+    + ensure(): <?>                   // ? 
     + isFeasible(): boolean           // true if no index j is forbidden
 
 + class Graph
