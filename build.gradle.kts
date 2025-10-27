@@ -1,12 +1,23 @@
-plugins { id("java") apply false }
+// No plugins block here.
+
+allprojects {
+    repositories { mavenCentral() }
+}
 
 subprojects {
-    apply(plugin = "java")
-    repositories { mavenCentral() }
-    tasks.withType<JavaCompile> {
-        sourceCompatibility = "17"; targetCompatibility = "17"; options.encoding = "UTF-8"
+    group = "edu.utexas.ece"
+    version = "0.1.0-SNAPSHOT"
+
+    tasks.withType<JavaCompile>().configureEach {
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+        options.encoding = "UTF-8"
     }
-    group = "edu.utexas.ece"; version = "0.1.0-SNAPSHOT"
+
+    // If a subproject has tests, this makes them use JUnit 5.
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
+    }
 }
 
 

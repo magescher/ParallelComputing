@@ -2,7 +2,7 @@ rootProject.name = "parallel-llp"
 
 include(
   "libs:llp",
-  "libs:graph,
+  "libs:graph",
   "apps:examples",
   "tests:it"
 )
