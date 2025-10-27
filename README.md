@@ -51,11 +51,16 @@ def get_least_feasible(T: vector, B: predicate)
 #### 1.2.1 Low Level Design
 - Note: Work in progress
 ```uml
-+ class LLP
-    + G: # global state vector of reals initially ∀i : G [i] = 0;
-    + B predicate
-    + initGlobalState() 
-    + getLeastFeasible(T: vector, B: predicate) // solver
++ interface LLPModule<T>
+    + G(): Vector<T>                  // global state vector 
+    + B(): Predicate<T>               // feasibility predicate on global state
+    + init(): void                    // initialize global state G
+    + always(): void                  // recompute derived variables/macros
+    + forbidden(): Forbidden<T>       // identifies indices violating B (or boolean yes/no?)
+    + advance(): Advance<T>           // computes least monotone fix (G, j)
+    + ensure(): EnsureSpec<T>[]       // monotone constraints (optional)
+    + isFeasible(): boolean           // true if no index j is forbidden
+
 ```
 
 #### 1.2.2 Applications
