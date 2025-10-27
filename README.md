@@ -3,7 +3,7 @@ Collection of multi-core and multi-process libraries and exercises.
 
 ## 1.0 LLP 
 
-### 1.1 Overview / Algorithm
+### 1.1 Notes
 - Step 1: 
     - Model the underlying search space - a distributive lattice of state vectors. 
         - Global State Vector where G [i] is the component for process i.
