@@ -1,8 +1,9 @@
-rootProject.name = "ParallelComputing"
+rootProject.name = "parallel-llp"
 
 include(
-  "libs:llp-core",
-  "apps:llp-examples",
+  "libs:llp",
+  "libs:graph,
+  "apps:examples",
   "tests:llp-core-it"
 )
 

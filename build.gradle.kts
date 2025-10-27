@@ -4,7 +4,7 @@ subprojects {
     // Apply Java plugin early so its extensions/tasks exist
     pluginManager.apply("java")
 
-    group = "edu.utexas.ece.parallel"
+    group = "edu.utexas.ece"
     version = "0.1.0"
 
     repositories { mavenCentral() }

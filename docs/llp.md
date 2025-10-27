@@ -36,7 +36,7 @@ def get_least_feasible(T: vector, B: predicate)
     return G ; # the optimal solution
 ```
 
-### 1.2 Assignment 
+### 1.2 Task List 
 
 [...] Java Library/API that allows one to use LLP parallel algorithms to solve problems. 
 [ ] source
