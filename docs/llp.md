@@ -9,17 +9,16 @@
 - Note: Work in progress
 
 ```uml
-+ class LLPParallelSolver
-    + <T> solve(m: LLP<T>): Vector<T>
 
-+ interface LLP<T>
++ class LLP<T>
     + G(): Vector<T>                                    // global state vector 
     + T(): Vector<T>                                    // top elem of lattice         
     + init(): void                                      // initialize global state G
-    + always(): void                                    // recompute derived variables/macros 
+    + always(): void <?>                                // recompute derived variables/macros 
     + isForbidden(j: int): boolean
     + advance(j: int): T
-    + ensure(): <?>                                     // ? 
+    + getLeastFeasible()                                // Solver (other algos will call into this after init global state)
+
 
 + class Graph
     + isDirected: boolean
@@ -33,6 +32,13 @@
     + connectedComponents(g: Graph): int[]              // Fast CC (LLP)
     + minimumSpanningTree(g: Graph): Edge[]             // Boruka (LLP)
 
+```
+
+Examples
+```
+// Dummy Algo
+alg = new LLL(G) // constructor can init
+answer = alg.getLeastFeasible()
 ```
 
 #### Applications
