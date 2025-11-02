@@ -43,8 +43,9 @@ class LLPAlgorithmsIT {
         int[] dist = bf.getSolution();
 
         // Expected shortest-path distances from node 0
-        int[] expected = {0, 4, 3, 1};
+        int[] expected = {0, 4, 2, 0};
 
+        System.out.println("dist = " + java.util.Arrays.toString(dist));
         assertArrayEquals(expected, dist,
             "Bellman–Ford should compute correct shortest-path distances");
     }

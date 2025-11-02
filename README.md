@@ -12,6 +12,6 @@ Build
 
 Test 
 ```bash
-./gradlew :tests:test
+./gradlew :tests:test --rerun-tasks
 ```
 
