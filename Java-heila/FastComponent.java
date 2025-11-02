@@ -2,7 +2,7 @@ public class FastComponent extends LLP {
     final int[][]adj; 
     int[] G; 
     int num; 
-    booleandebug=true; 
+    boolean debug=true; 
     
     public FastComponent(int num, int[][]adj){ 
         super(num); 
