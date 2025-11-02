@@ -12,6 +12,6 @@ Build
 
 Test 
 ```bash
-./gradlew test
+./gradlew :tests:test
 ```
 

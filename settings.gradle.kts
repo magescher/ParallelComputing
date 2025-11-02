@@ -2,6 +2,6 @@ rootProject.name = "ParallelComputing"
 
 include(
   "libs:llp",
-  "tests:it"
+  "tests"
 )
 

@@ -1,20 +1,21 @@
-plugins {
-    java
-}
+plugins { java }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(25))
+        languageVersion.set(JavaLanguageVersion.of(25)) 
     }
 }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
+    // bring in consistent JUnit 5 versions
+    testImplementation(platform("org.junit:junit-bom:5.10.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")       
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") 
+
+    // your project under test
     testImplementation(project(":libs:llp"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 
 tasks.test {
