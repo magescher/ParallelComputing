@@ -15,6 +15,7 @@ public class Johnson extends LLP {
         for (int i=0; i<num; i++) G[i] = 0;
     }
     
+    @Override
     public boolean ensure(int j) {
         boolean changed = false;
         for (int i: pre[j])

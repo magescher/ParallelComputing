@@ -14,6 +14,7 @@ public class FastComponents extends LLP {
         for (int i=0; i<num; i++) G[i] = i;
     }
 
+    @Override
     public boolean ensure(int j) {
         boolean changed = false;
         if (G[j] != G[G[j]]) { G[j] = G[G[j]]; changed = true; }

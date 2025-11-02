@@ -17,6 +17,7 @@ public class BellmanFord extends LLP {
             G[0] = 0;
     }
     
+    @Override
     public boolean ensure(int j) {
         boolean changed = false;
         for (int i: pre[j])
