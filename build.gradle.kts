@@ -9,8 +9,8 @@ subprojects {
     version = "0.1.0-SNAPSHOT"
 
     tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
+        sourceCompatibility = "25"
+        targetCompatibility = "25"
         options.encoding = "UTF-8"
     }
 

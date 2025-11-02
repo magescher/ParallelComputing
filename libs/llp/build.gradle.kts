@@ -1,2 +1,17 @@
-plugins { `java-library` }
-dependencies { testImplementation("org.junit.jupiter:junit-jupiter:5.11.0") }
+plugins {
+    `java-library`
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // no test dependencies here yet
+}

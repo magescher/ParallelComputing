@@ -1,46 +1,32 @@
 package edu.utexas.ece.llp;
 
-/**
- * Interface representing a lattice-linear problem module.
- * Encapsulates the global state and problem-specific update logic.
- */
-public interface LLP<T> {
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.IntStream;
 
-    /**
-     * Global state vector (mutable).
-     */
-    Vector<T> G();
+public abstract class LLP {
+    protected final int n;
 
-    /**
-     * Top element of lattice (optional termination guard).
-     */
-    Vector<T> T();
+    protected LLP(int n) { this.n = n; }
 
-    /**
-     * Initializes the global state vector.
-     */
-    void init();
+    // Optional hooks for subclasses that use forbidden/advance
+    protected boolean forbidden(int j) { return false; }
+    protected void advance(int j) {}
 
-    /**
-     * Recomputes any derived variables or macros (optional).
-     */
-    void always();
-
-    /**
-     * Returns true if component j is currently forbidden.
-     */
-    boolean isForbidden(int j);
-
-    /**
-     * Computes the least monotone fix (G, j) for component j.
-     */
-    T advance(int j);
-
-    /**
-     * Returns true if the module is in a feasible state.
-     * Default implementation returns false.
-     */
-    default boolean isFeasible() {
+    // Default ensure delegates to forbidden/advance
+    protected boolean ensure(int j) {
+        if (forbidden(j)) { advance(j); return true; }
         return false;
     }
+
+    // Always-parallel fixpoint loop
+    public final void solve() {
+        while (true) {
+            AtomicBoolean changed = new AtomicBoolean(false);
+            IntStream.range(0, n).parallel().forEach(j -> {
+                if (ensure(j)) changed.set(true);
+            });
+            if (!changed.get()) return;
+        }
+    }
 }
+

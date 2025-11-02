@@ -5,18 +5,13 @@ Collection of multi-core and multi-process libraries and exercises.
 
 - See docs/llp.md for notes and LLD
 
-- Build
+Build
 ```bash
 ./gradlew clean build
 ```
 
-- Run 
+Test 
 ```bash
-TODO
-```
-
-- Test 
-```bash
-TODO
+./gradlew :tests:test --rerun-tasks
 ```
 
