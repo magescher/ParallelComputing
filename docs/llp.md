@@ -16,21 +16,12 @@
     + advance
     + ensure
     + solve
-
-
 ```
 
-Examples
-```
-// Dummy Algo
-alg = new LLL(G) // constructor can init
-answer = alg.getLeastFeasible()
-```
 
 #### Applications
 
 ##### Parallel Prefix [X]
-- TODO 
 
 ##### Stable Marriage [X]
 - Input: ordered preferences of n men and n women
