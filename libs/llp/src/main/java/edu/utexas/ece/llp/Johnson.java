@@ -1,30 +1,41 @@
 package edu.utexas.ece.llp;
 
+import java.util.Arrays;
+
+/**
+ * Johnson (LLP variant): computes feasible vertex potentials for reweighting edges
+ * in a weighted digraph (no negative cycles).
+ * Exposes the current potential vector via {@link #getSolution()}.
+ *
+ * @author Abigail Johnson
+ */
 public class Johnson extends LLP {
-    
-    final int[][] pre;
-    final int[][] w;
-    int[] G;
-    int num;
-    
-    public Johnson(int num, int[][] pre, int[][] w) {
-        super(num); 
-        this.pre = pre; 
+
+    private final int[][] pre;   // pre[j]: predecessors of j
+    private final int[][] w;     // w[i][j]: weight of edge i -> j
+    private final int[] G;       // vertex potentials
+
+    /** Constructs Johnson’s algorithm (LLP form). */
+    public Johnson(int n, int[][] pre, int[][] w) {
+        super(n);
+        this.pre = pre;
         this.w = w;
-        G = new int[num];
-        for (int i=0; i<num; i++) G[i] = 0;
+        this.G = new int[n];
+        Arrays.fill(G, 0);
     }
-    
+
+    /**
+     * Enforces: G[j] >= max { G[i] - w[i,j] | i in pre(j) } for vertex j.
+     * @return true if G[j] increased
+     */
     @Override
     public boolean ensure(int j) {
-        boolean changed = false;
-        for (int i: pre[j])
-        if (G[j] < G[i] - w[i][j]) {
-            G[j] = G[i] - w[i][j];
-            changed = true;
-        }
-        return changed;
-    }
-    
+        int best = G[j];
+        for (int i : pre[j]) best = max(best, G[i] - w[i][j]);
+        if (best > G[j]) { G[j] = best; return true; }
+        return false;
+}
+
+    /** Current potential vector G[0..n-1]. */
     public int[] getSolution() { return G; }
 }
