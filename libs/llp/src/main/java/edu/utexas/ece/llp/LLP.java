@@ -14,7 +14,6 @@ public abstract class LLP {
     protected static int min(int a, int b) { return (a <= b) ? a : b; }
     protected static int max(int a, int b) { return (a >= b) ? a : b; }
 
-
     // Optional hooks for subclasses that use forbidden/advance
     protected boolean forbidden(int j) { return false; }
     protected void advance(int j) {}
