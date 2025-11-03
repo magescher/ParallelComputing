@@ -46,9 +46,9 @@ public class PrefixSum extends LLP {
 
     public int[] getSolution() {
         ensureSolved();
-        int[] prefix = new int[n];
-        for (int i = n; i < 2 * n; i++)
-            prefix[i - n] = G[i];
-        return prefix;
+        int[] prefixSum = new int[n];
+        for (int i = n; i < vectorSize; i++)
+            prefixSum[i - n] = G[i];
+        return prefixSum;
     }
 }
