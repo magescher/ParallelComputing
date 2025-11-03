@@ -8,7 +8,7 @@ import java.util.Arrays;
  *  
  * @author Abigail Johnson
  * 
- * input: pre(j): list of 1..n; w[i, j]: int for all i ↑ pre(j)
+ * input: pre(j): list of 1..n; w[i, j]: int for all i inc in pre(j)
  * init: if (j = s) then G[j] == 0 else G[j] = maxint;
  * ensure: G[j] = min{G[i] + w[i, j] | i inc in pre(j)}
  */

@@ -34,7 +34,7 @@ public class Johnson extends LLP {
         for (int i : pre[j]) best = max(best, G[i] - w[i][j]);
         if (best > G[j]) { G[j] = best; return true; }
         return false;
-}
+    }
 
     /** Current potential vector G[0..n-1]. */
     public int[] getSolution() { 
