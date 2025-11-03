@@ -6,10 +6,8 @@
 - [ ] script that runs the program (tests below algorithms). 
 
 #### Low Level Design
-- Note: Work in progress
 
 ```uml
-
 + abstract class LLP
     + n     // size (num thread)
     + forbidden
@@ -18,6 +16,11 @@
     + solve
 ```
 
+Example
+```java
+BellmanFord bf = new BellmanFord(pre, w);
+int[] dist = bf.getSolution();
+```
 
 #### Applications
 
