@@ -19,12 +19,16 @@ public class BellmanFord extends LLP {
     private final int[][] w;     // w[i][j]: weight of edge i -> j
     private final int src;       // chosen source
     
+    /** Default: source = 0 */
+    public BellmanFord(int[][] pre, int[][] w) { this(pre, w, 0); }
+
     /** Constructs Bellman–Ford using vertex 0 as source. */
-    public BellmanFord(int[][] pre, int[][] w) {
-        super(pre.length);
-        this.G = new int[pre.length];
+    public BellmanFord(int[][] pre, int[][] w, int src) {
+        super(pre.length);       // Set vector size in parent class
+        if (src < 0 || src >= vectorSize) throw new IllegalArgumentException("Source out of range");
+        this.G = new int[vectorSize];
         Arrays.fill(G, INF);
-        G[0] = 0;
+        G[src] = 0;
         this.pre = pre;
         this.w = w;
     }
