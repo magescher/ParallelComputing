@@ -3,19 +3,19 @@ package edu.utexas.ece.llp;
 import java.util.Arrays;
 
 /**
- * FastComponents (LLP variant): computes connected components 
+ * Fast Connected Components (LLP variant): computes connected components 
  * using parallel pointer jumping and label propagation.
  * Exposes the component labels via {@link #getSolution()}.
  * 
  * @author Abigail Johnson
  */
-public class FastComponents extends LLP {
+public class ConnectedComponents extends LLP {
 
     private final int[] G;      // component labels
     private final int[][] adj;  // adj[j]: neighbors of j
 
-    /** Constructs FastComponents with initial labels G[j] = j. */
-    public FastComponents(int n, int[][] adj) {
+    /** Constructs Fast Connected Components with initial labels G[j] = j. */
+    public ConnectedComponentsComponents(int n, int[][] adj) {
         super(n);
         this.adj = adj;
         this.G = new int[n];
