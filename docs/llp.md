@@ -28,13 +28,13 @@ int[] dist = bf.getSolution();
 - // Assume n is a power of 2 for simplicity
 - input: 
     - A: array[1..n] of int
-    - S: array[1..n → 1] of int // summation tree
-- output:G:array[1..2n → 1] of int such that G[i] = Par Prefix sum
-- init: G[j] := INF
-- ensure: G[j] = 0 if j = 1
-- ensure: G[j] = G[j/2] if j is even
-- ensure: G[j] = S[j → 1] + G[j/2] if j is odd and j < n
-- ensure: G[j] = A[j → n] + G[j/2] if j is odd and j > n
+    - S: array[1..n - 1] of int // summation tree
+- output:G:array[1..2n - 1] of int such that G[i] = Par Prefix sum
+- init: G[j] := -INF
+- ensure: G[j] >= 0 if j = 1
+- ensure: G[j] >= G[j/2] if j is even
+- ensure: G[j] >= S[j - 1] + G[j/2] if j is odd and j < n
+- ensure: G[j] >= A[j - n] + G[j/2] if j is odd and j > n
 
 ##### Stable Marriage 
 - Input: ordered preferences of n men and n women
@@ -45,7 +45,7 @@ int[] dist = bf.getSolution();
 - Init: G[j] = i[j] // works for any init 
 - Always: z = mpref[ j ][ G[j] ]
 - Forbidden: ∃i : ∃k ≤ G [i]: (z = mpref[i][k]) ∧ (rank[z][i] < rank[z][j]))
-    - Advance: G[j] = G[j] + 1
+ - Advance: G[j] = G[j] + 1
 
 ##### Shortest Path (no negative cycles)
 - Algorithm: Bellman-Ford
