@@ -15,13 +15,13 @@ public class BellmanFord extends LLP {
     private final int[][] w;     // w[i][j]: weight of edge i -> j
     
     /** Constructs Bellman–Ford using vertex 0 as source. */
-    public BellmanFord(int n, int[][] pre, int[][] w) {
-        super(n);
-        this.pre = pre;
-        this.w = w;
+    public BellmanFord(int[][] pre, int[][] w) {
+        super(pre.length);
         this.G = new int[n];
         Arrays.fill(G, INF);
         G[0] = 0;
+        this.pre = pre;
+        this.w = w;
     }
     
     /**
