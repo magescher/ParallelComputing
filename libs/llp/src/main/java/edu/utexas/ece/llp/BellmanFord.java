@@ -17,7 +17,6 @@ public class BellmanFord extends LLP {
     private final int[] G;       // distance labels
     private final int[][] pre;   // pre[j]: predecessors of j
     private final int[][] w;     // w[i][j]: weight of edge i -> j
-    private final int src;       // chosen source
     
     /** Default: source = 0 */
     public BellmanFord(int[][] pre, int[][] w) { this(pre, w, 0); }

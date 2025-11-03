@@ -10,7 +10,6 @@ public class StableMatching extends LLP {
 
     private final int[] G;                      // current proposal index per man
     private final int[][] womenPref, menPref;   // preference lists
-    private final int numMen;
 
     public StableMatching(int[][] menPref, int[][] womenPref) {
         super(menPref.length);                  // Set vector size in parent class
@@ -21,8 +20,8 @@ public class StableMatching extends LLP {
 
     @Override
     protected boolean forbidden(int j) {
-        int[] womenRank = womenPref[z];          // woman's preference over men
         int prospect = menPref[j][G[j]];         // woman j is currently proposing to
+        int[] womenRank = womenPref[prospect];   // woman's preference over men
         for (int i = 0; i < vectorSize; i++) {
             if (i != j && menPref[i][G[i]] == prospect && womenRank[i] < womenRank[j]) return true; // z prefers i over j
         }
