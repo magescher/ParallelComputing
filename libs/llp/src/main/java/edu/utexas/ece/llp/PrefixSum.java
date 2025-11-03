@@ -19,7 +19,6 @@ public class PrefixSum extends LLP {
         if (S.length != n - 1) throw new IllegalArgumentException("S must have length N-1");
         G = new int[vectorSize];
         Arrays.fill(G, Integer.MIN_VALUE);       // Init G[j] = - INF
-        G[0] = -1;                               // Dummy Value
         this.A = A;
         this.S = S;
     }
@@ -35,10 +34,16 @@ public class PrefixSum extends LLP {
     public boolean ensure(int j){
         int old = G[j];
         int best = old;
-        if (j==1) best = max(best, 0);
-        else if (j % 2 ==0 ) best = max(best, G[j/2]); 
-        else if (j % 2 == 1 && j < n) best = max(best, S[j - 2] + G[j/2]);
-        else if (j % 2 == 1 && j > n) best = max(best, A[j - n - 1] + G[j/2] );
+        
+        // 1. root
+        if (j == 1) best = max(best, 0);
+        // 2. even: copy parent
+        else if (j % 2 == 0 && j < n) best = max(best, G[j / 2]);
+        // 3. odd internal: add left-subtree sum
+        else if (j % 2 == 1 && j < n) best = max(best, G[j / 2] + S[(j - 3) / 2]);
+        // 4. leaves: add element, and for right leaves include left sibling
+        else if (j >= n) best = max(best, G[j / 2] + A[j - n] + ((j % 2 == 1) ? A[j - n - 1] : 0));
+
         G[j] = best;
         return G[j] != old;
     }
