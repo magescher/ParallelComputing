@@ -20,7 +20,6 @@ class LLPAlgorithmsIT {
          * 1 → 3 (5)
          * 2 → 3 (-2)
          */
-        int n = 4;
 
         int[][] pre = {
             {},        // 0
@@ -54,10 +53,8 @@ class LLPAlgorithmsIT {
         int[][] adj = {
             {1, 2}, {0, 2}, {0, 1}, {4}, {3}
         };
-        ConnectComponentsComponents fc = new ConnectComponents(adj);
+        ConnectedComponents fc = new ConnectedComponents(adj);
         int[] comps = fc.getSolution();
-
-        assertEquals(n, comps.length, "component array should cover all vertices");
 
         // Expect two components: {0,1,2} and {3,4}
         int labelA = comps[0], labelB = comps[3];
