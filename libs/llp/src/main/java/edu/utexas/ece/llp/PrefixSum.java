@@ -19,7 +19,7 @@ public class PrefixSum extends LLP {
         if (S.length != n - 1) throw new IllegalArgumentException("S must have length N-1");
         G = new int[vectorSize];
         Arrays.fill(G, -1 * INF);       // Init G[j] = - INF
-        G[0] = -1                       // Dummy Value
+        G[0] = -1;                      // Dummy Value
         this.A = A;
         this.S = S;
     }
@@ -32,7 +32,7 @@ public class PrefixSum extends LLP {
      *  - ensure: G[j] >= A[j - n] + G[j/2] if j is odd and j > n
      */
     @Override
-    public boolean ensure(){
+    public boolean ensure(int j){
         if (j <= 0 || j >= vectorSize) return false;
         
         int old = G[j], best = old;
