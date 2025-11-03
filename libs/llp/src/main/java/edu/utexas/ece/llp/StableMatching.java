@@ -34,6 +34,7 @@ public class StableMatching extends LLP {
 
     /** Returns man-optimal proposal assignment: assignment[j] = woman matched to man j. */
     public int[] getSolution() {
+        ensureSolved();
         int[] proposals = new int[numMen];
         for (int j = 0; j < numMen; j++) proposals[j] = menPref[j][G[j]];
         return proposals;

@@ -36,6 +36,7 @@ public class ParPrefix extends LLP {
     }
 
     public int[] getSolution() {
+        ensureSolved();
         int[] prefix = new int[n];
         for (int i = n; i < 2*n; i++)
             prefix[i-n] = G[i];

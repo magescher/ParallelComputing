@@ -7,6 +7,9 @@ public abstract class LLP {
     
     protected final int n;
     protected static final int INF = 1_000_000_000; // 1e9, acts as "infinity"
+    
+    // True once the algorithm has reached a fixed point
+    private final AtomicBoolean isSolved = new AtomicBoolean(false);
 
     protected LLP(int n) { this.n = n; }
 
@@ -26,13 +29,19 @@ public abstract class LLP {
 
     // Always-parallel fixpoint loop
     public final void solve() {
+        if (isSolved.get()) return;  // Already solved — skip
         while (true) {
             AtomicBoolean update = new AtomicBoolean(false);
             IntStream.range(0, n).parallel().forEach(j -> {
                 if (ensure(j)) update.set(true);
             });
-            if (!update.get()) return;
+            if (!update.get()) {
+                isSolved.set(true);  // Mark as done
+                return;
+            }
         }
     }
+
+    protected final void ensureSolved() { solve(); }
 }
 

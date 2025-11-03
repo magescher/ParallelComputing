@@ -40,5 +40,8 @@ public class ConnectedComponents extends LLP {
     }
 
     /** Returns the current component labels G[0..n-1]. */
-    public int[] getSolution() { return G; }
+    public int[] getSolution() { 
+        ensureSolved();
+        return G; 
+    }
 }

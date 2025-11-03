@@ -37,5 +37,8 @@ public class Johnson extends LLP {
 }
 
     /** Current potential vector G[0..n-1]. */
-    public int[] getSolution() { return G; }
+    public int[] getSolution() { 
+        ensureSolved();
+        return G; 
+    }
 }

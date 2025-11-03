@@ -40,5 +40,8 @@ public class BellmanFord extends LLP {
     }
 
     /** Current distance vector G[0..n-1]. */
-    public int[] getSolution() { return G; }
+    public int[] getSolution() { 
+        ensureSolved();
+        return G; 
+    }
 }
