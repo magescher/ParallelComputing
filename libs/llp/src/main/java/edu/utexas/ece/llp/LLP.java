@@ -27,11 +27,11 @@ public abstract class LLP {
     // Always-parallel fixpoint loop
     public final void solve() {
         while (true) {
-            AtomicBoolean changed = new AtomicBoolean(false);
+            AtomicBoolean update = new AtomicBoolean(false);
             IntStream.range(0, n).parallel().forEach(j -> {
-                if (ensure(j)) changed.set(true);
+                if (ensure(j)) update.set(true);
             });
-            if (!changed.get()) return;
+            if (!update.get()) return;
         }
     }
 }

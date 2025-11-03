@@ -2,7 +2,7 @@ package edu.utexas.ece.llp;
 
 /**
  * Stable Matching (LLP variant): man-optimal matching.
- * Exposes the current distance vector via {@link #getSolution()}.
+ * Exposes proposal assignment via {@link #getSolution()}.
  */
 public class StableMatching extends LLP {
 

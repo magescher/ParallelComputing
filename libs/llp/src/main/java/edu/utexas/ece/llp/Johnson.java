@@ -16,9 +16,9 @@ public class Johnson extends LLP {
     private final int[][] w;     // w[i][j]: weight of edge i -> j
 
     /** Constructs Johnson’s algorithm (LLP form). */
-    public Johnson(int n, int[][] pre, int[][] w) {
-        super(n);
-        this.G = new int[n];
+    public Johnson(int[][] pre, int[][] w) {
+        super(pre.length);
+        this.G = new int[pre.length];
         Arrays.fill(G, 0);
         this.pre = pre;
         this.w = w;
