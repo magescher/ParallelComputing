@@ -11,8 +11,8 @@ import java.util.Arrays;
  */
 public class FastComponents extends LLP {
 
-    private final int[][] adj;  // adj[j]: neighbors of j
     private final int[] G;      // component labels
+    private final int[][] adj;  // adj[j]: neighbors of j
 
     /** Constructs FastComponents with initial labels G[j] = j. */
     public FastComponents(int n, int[][] adj) {

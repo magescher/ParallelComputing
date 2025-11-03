@@ -1,19 +1,16 @@
 package edu.utexas.ece.llp;
 
 /**
- * Stable Marriage (LLP variant): man-optimal matching.
+ * Stable Matching (LLP variant): man-optimal matching.
+ * Exposes the current distance vector via {@link #getSolution()}.
  */
-public class StableMarriage extends LLP {
+public class StableMatching extends LLP {
 
-    private final int m, w;
-    private final int[][] menPref;     // menPref[j][k]: man j's k-th preferred woman
-    private final int[][] womenPref;   // womenPref[z][i]: rank of man i for woman z
-    private final int[] G;             // current proposal index per man
+    private final int[] G;                      // current proposal index per man
+    private final int[][] womenPref, menPref;   // preference lists
 
-    public StableMarriage(int[][] menPref, int[][] womenPref) {
+    public StableMatching(int[][] menPref, int[][] womenPref) {
         super(menPref.length);
-        this.m = menPref.length;
-        this.w = womenPref.length;
         this.menPref = menPref;
         this.womenPref = womenPref;
         this.G = new int[m];  // Init: G[j] = 0
@@ -21,11 +18,11 @@ public class StableMarriage extends LLP {
 
     @Override
     protected boolean forbidden(int j) {
-        int z = menPref[j][G[j]];      // woman j is currently proposing to
         int[] womenRank = womenPref[z];    // woman's preference over men
-        for (int i = 0; i < m; i++) {
-            if (i == j) continue;
-            if (menPref[i][G[i]] == z && womenRank[i] < womenRank[j]) return true; // z prefers i over j
+        int z = menPref[j][G[j]];           // woman j is currently proposing to
+        int numMen = menPref.length;
+        for (int i = 0; i < numMen; i++) {
+            if (i != j && menPref[i][G[i]] == z && womenRank[i] < womenRank[j]) return true; // z prefers i over j
         }
         return false;
     }
@@ -34,11 +31,12 @@ public class StableMarriage extends LLP {
     // man j moves to next woman on his list
     protected void advance(int j) { G[j]++; }
 
-    /** Returns man-optimal assignment: assignment[j] = woman matched to man j. */
+    /** Returns man-optimal proposal assignment: assignment[j] = woman matched to man j. */
     public int[] getSolution() {
-        int[] assignment = new int[m];
-        for (int j = 0; j < m; j++) assignment[j] = menPref[j][G[j]];
-        return assignment;
+        int numMen = menPref.length;
+        int[] proposals = new int[numMen];
+        for (int j = 0; j < numMen; j++) proposals[j] = menPref[j][G[j]];
+        return proposals;
     }
 }
 

@@ -10,9 +10,9 @@ import java.util.Arrays;
  */
 public class BellmanFord extends LLP {
 
+    private final int[] G;       // distance labels
     private final int[][] pre;   // pre[j]: predecessors of j
     private final int[][] w;     // w[i][j]: weight of edge i -> j
-    private final int[] G;       // distance labels
     
     /** Constructs Bellman–Ford using vertex 0 as source. */
     public BellmanFord(int n, int[][] pre, int[][] w) {

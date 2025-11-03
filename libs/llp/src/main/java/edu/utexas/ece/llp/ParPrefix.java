@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class ParPrefix extends LLP {
     
+    int[] G;
     final int n;
     final int[] A;
     final int[] S;
-    int[] G;
     
     public ParPrefix(int[] A, int[] S) {
         super(A.length * 2);

@@ -11,17 +11,17 @@ import java.util.Arrays;
  */
 public class Johnson extends LLP {
 
+    private final int[] G;       // distance labels
     private final int[][] pre;   // pre[j]: predecessors of j
     private final int[][] w;     // w[i][j]: weight of edge i -> j
-    private final int[] G;       // vertex potentials
 
     /** Constructs Johnson’s algorithm (LLP form). */
     public Johnson(int n, int[][] pre, int[][] w) {
         super(n);
-        this.pre = pre;
-        this.w = w;
         this.G = new int[n];
         Arrays.fill(G, 0);
+        this.pre = pre;
+        this.w = w;
     }
 
     /**
