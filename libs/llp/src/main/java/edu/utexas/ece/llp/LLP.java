@@ -3,6 +3,11 @@ package edu.utexas.ece.llp;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
+/**
+ * LLP Solver
+ *  
+ * @author Abigail Johnson
+ */
 public abstract class LLP {
     
     protected final int vectorSize;
