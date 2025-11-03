@@ -15,11 +15,11 @@ public class ConnectedComponents extends LLP {
     private final int[][] adj;  // adj[j]: neighbors of j
 
     /** Constructs Fast Connected Components with initial labels G[j] = j. */
-    public ConnectedComponentsComponents(int n, int[][] adj) {
-        super(n);
+    public ConnectedComponentsComponents(int[][] adj) {
+        super(adj.length);      // Set vector size in parent class
         this.adj = adj;
-        this.G = new int[n];
-        for (int j = 0; j < n; j++) G[j] = j;  // Init: G[j] = j
+        this.G = new int[vectorSize];
+        for (int j = 0; j < vectorSize; j++) G[j] = j;  // Init: G[j] = j
     }
 
     /**

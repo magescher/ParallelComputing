@@ -7,17 +7,22 @@ import java.util.Arrays;
  * Exposes the current distance vector via {@link #getSolution()}.
  *  
  * @author Abigail Johnson
+ * 
+ * input: pre(j): list of 1..n; w[i, j]: int for all i ↑ pre(j)
+ * init: if (j = s) then G[j] == 0 else G[j] = maxint;
+ * ensure: G[j] = min{G[i] + w[i, j] | i inc in pre(j)}
  */
 public class BellmanFord extends LLP {
 
     private final int[] G;       // distance labels
     private final int[][] pre;   // pre[j]: predecessors of j
     private final int[][] w;     // w[i][j]: weight of edge i -> j
+    private final int src;       // chosen source
     
     /** Constructs Bellman–Ford using vertex 0 as source. */
     public BellmanFord(int[][] pre, int[][] w) {
         super(pre.length);
-        this.G = new int[n];
+        this.G = new int[pre.length];
         Arrays.fill(G, INF);
         G[0] = 0;
         this.pre = pre;

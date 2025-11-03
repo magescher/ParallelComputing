@@ -5,13 +5,13 @@ import java.util.stream.IntStream;
 
 public abstract class LLP {
     
-    protected final int n;
+    protected final int vectorSize;
     protected static final int INF = 1_000_000_000; // 1e9, acts as "infinity"
     
     // True once the algorithm has reached a fixed point
     private final AtomicBoolean isSolved = new AtomicBoolean(false);
 
-    protected LLP(int n) { this.n = n; }
+    protected LLP(int vectorSize) { this.vectorSize = vectorSize; }
 
     // Utilities
     protected static int min(int a, int b) { return (a <= b) ? a : b; }
@@ -32,7 +32,7 @@ public abstract class LLP {
         if (isSolved.get()) return;  // Already solved — skip
         while (true) {
             AtomicBoolean update = new AtomicBoolean(false);
-            IntStream.range(0, n).parallel().forEach(j -> {
+            IntStream.range(0, vectorSize).parallel().forEach(j -> {
                 if (ensure(j)) update.set(true);
             });
             if (!update.get()) {

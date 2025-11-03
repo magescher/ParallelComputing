@@ -17,8 +17,8 @@ public class Johnson extends LLP {
 
     /** Constructs Johnson’s algorithm (LLP form). */
     public Johnson(int[][] pre, int[][] w) {
-        super(pre.length);
-        this.G = new int[pre.length];
+        super(pre.length);      // Set vector size in parent class
+        this.G = new int[vectorSize];
         Arrays.fill(G, 0);
         this.pre = pre;
         this.w = w;
