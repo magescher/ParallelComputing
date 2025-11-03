@@ -1,38 +1,42 @@
 ### Task List 
 
-- [...] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
-- [...] source. 
+- [x] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
+- [x] source. 
 - [ ] program to generate testcases. 
 - [ ] script that runs the program (tests below algorithms). 
 
 #### Low Level Design
-- Note: Work in progress
 
 ```uml
-
 + abstract class LLP
     + n     // size (num thread)
     + forbidden
     + advance
     + ensure
     + solve
-
-
 ```
 
-Examples
-```
-// Dummy Algo
-alg = new LLL(G) // constructor can init
-answer = alg.getLeastFeasible()
+Example
+```java
+BellmanFord bf = new BellmanFord(pre, w);
+int[] dist = bf.getSolution();
 ```
 
 #### Applications
 
-##### Parallel Prefix [X]
-- TODO 
+##### Parallel Prefix 
+- // Assume n is a power of 2 for simplicity
+- input: 
+    - A: array[1..n] of int
+    - S: array[1..n - 1] of int // summation tree
+- output:G:array[1..2n - 1] of int such that G[i] = Par Prefix sum
+- init: G[j] := -INF
+- ensure: G[j] >= 0 if j = 1
+- ensure: G[j] >= G[j/2] if j is even
+- ensure: G[j] >= S[j - 1] + G[j/2] if j is odd and j < n
+- ensure: G[j] >= A[j - n] + G[j/2] if j is odd and j > n
 
-##### Stable Marriage [X]
+##### Stable Marriage 
 - Input: ordered preferences of n men and n women
 - Output: Man-optimal stable marriage
 
@@ -41,9 +45,9 @@ answer = alg.getLeastFeasible()
 - Init: G[j] = i[j] // works for any init 
 - Always: z = mpref[ j ][ G[j] ]
 - Forbidden: ∃i : ∃k ≤ G [i]: (z = mpref[i][k]) ∧ (rank[z][i] < rank[z][j]))
-    - Advance: G[j] = G[j] + 1
+ - Advance: G[j] = G[j] + 1
 
-##### Shortest Path (no negative cycles) [X]
+##### Shortest Path (no negative cycles)
 - Algorithm: Bellman-Ford
 - Input: a weighted directed graph and a source vertex
 - Output: Least Cost of reaching any vertex i
@@ -52,7 +56,7 @@ answer = alg.getLeastFeasible()
 - Init: ( j == s ) ? G[j] = 0 : G[j] = maxint
 - Ensure: G[j] <= min { G[i] + w[i,j] | i included in pre(j) }
 
-##### Shortest path (w/ negative cycles) [X]
+##### Shortest path (w/ negative cycles) 
 - Algorithm: Johnson (finding min price vector)
 
 - w'[i,j] = w[i,j] + p[i] - p[j] // where prices >= 0 all w' >= 0
@@ -60,7 +64,7 @@ answer = alg.getLeastFeasible()
 - Init: p[j] = 0 for all j; w[i][j] for all i in pre(j)
 - Ensure: p[j] >= max { p[i] - w[i,j] for i included inpre(j) }
 
-##### Connected Components (undirected graph) [X]
+##### Connected Components (undirected graph) 
 - Algorithm: Fast 
 
 - Init: parent[j] = j

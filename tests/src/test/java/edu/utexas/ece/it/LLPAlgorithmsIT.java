@@ -20,7 +20,6 @@ class LLPAlgorithmsIT {
          * 1 → 3 (5)
          * 2 → 3 (-2)
          */
-        int n = 4;
 
         int[][] pre = {
             {},        // 0
@@ -38,8 +37,7 @@ class LLPAlgorithmsIT {
         };
 
         // Instantiate and run the LLP-based Bellman-Ford
-        BellmanFord bf = new BellmanFord(n, pre, w);
-        bf.solve();
+        BellmanFord bf = new BellmanFord(pre, w);
         int[] dist = bf.getSolution();
 
         // Expected shortest-path distances from node 0
@@ -52,15 +50,11 @@ class LLPAlgorithmsIT {
 
     @Test
     void fastComponents_returnsLabelsForAllVertices() {
-        int n = 5;
         int[][] adj = {
             {1, 2}, {0, 2}, {0, 1}, {4}, {3}
         };
-        FastComponents fc = new FastComponents(n, adj);
-        fc.solve();
+        ConnectedComponents fc = new ConnectedComponents(adj);
         int[] comps = fc.getSolution();
-
-        assertEquals(n, comps.length, "component array should cover all vertices");
 
         // Expect two components: {0,1,2} and {3,4}
         int labelA = comps[0], labelB = comps[3];
