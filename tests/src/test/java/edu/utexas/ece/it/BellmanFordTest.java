@@ -29,11 +29,7 @@ class BellmanFordSimpleTest {
         w[1][2] = 2;
         w[0][2] = 10;
 
-        BellmanFord bf = new BellmanFord(num, pre, w);
-
-        // use inherited LLP iteration
-        bf.solve();
-
+        BellmanFord bf = new BellmanFord(pre, w);
         int[] dist = bf.getSolution();
         assertArrayEquals(new int[]{0, 5, 7}, dist,
                 "Expected distances [0,5,7] but got " + Arrays.toString(dist));

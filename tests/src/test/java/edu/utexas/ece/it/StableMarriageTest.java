@@ -2,7 +2,7 @@ package edu.utexas.ece.it;
 
 import org.junit.jupiter.api.Test;
 
-import edu.utexas.ece.llp.StableMarriage;
+import edu.utexas.ece.llp.StableMatching;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,9 +24,7 @@ class StableMarriageTest {
             {1, 0}
         };
 
-        StableMarriage sm = new StableMarriage(mprefs, wprefs);
-        sm.solve();
-
+        StableMatching sm = new StableMatching(mprefs, wprefs);
         int[] wifeOfMan = sm.getSolution();
 
         assertArrayEquals(new int[]{0, 1}, wifeOfMan,
