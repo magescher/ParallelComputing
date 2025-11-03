@@ -1,7 +1,7 @@
 ### Task List 
 
-- [...] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
-- [...] source. 
+- [x] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
+- [x] source. 
 - [ ] program to generate testcases. 
 - [ ] script that runs the program (tests below algorithms). 
 
@@ -21,9 +21,9 @@
 
 #### Applications
 
-##### Parallel Prefix [X]
+##### Parallel Prefix 
 
-##### Stable Marriage [X]
+##### Stable Marriage 
 - Input: ordered preferences of n men and n women
 - Output: Man-optimal stable marriage
 
@@ -34,7 +34,7 @@
 - Forbidden: ∃i : ∃k ≤ G [i]: (z = mpref[i][k]) ∧ (rank[z][i] < rank[z][j]))
     - Advance: G[j] = G[j] + 1
 
-##### Shortest Path (no negative cycles) [X]
+##### Shortest Path (no negative cycles)
 - Algorithm: Bellman-Ford
 - Input: a weighted directed graph and a source vertex
 - Output: Least Cost of reaching any vertex i
@@ -43,7 +43,7 @@
 - Init: ( j == s ) ? G[j] = 0 : G[j] = maxint
 - Ensure: G[j] <= min { G[i] + w[i,j] | i included in pre(j) }
 
-##### Shortest path (w/ negative cycles) [X]
+##### Shortest path (w/ negative cycles) 
 - Algorithm: Johnson (finding min price vector)
 
 - w'[i,j] = w[i,j] + p[i] - p[j] // where prices >= 0 all w' >= 0
@@ -51,7 +51,7 @@
 - Init: p[j] = 0 for all j; w[i][j] for all i in pre(j)
 - Ensure: p[j] >= max { p[i] - w[i,j] for i included inpre(j) }
 
-##### Connected Components (undirected graph) [X]
+##### Connected Components (undirected graph) 
 - Algorithm: Fast 
 
 - Init: parent[j] = j
