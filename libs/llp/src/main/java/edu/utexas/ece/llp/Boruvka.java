@@ -2,12 +2,12 @@ package edu.utexas.ece.llp;
 
 import java.util.*;
 
-public class BoruvkaMST extends LLP {
+public class Boruvka extends LLP {
     public static record Edge(int u,int v,int w) {}
     private final List<Edge> E, T = new ArrayList<>();
     private final int[] G;
 
-    public BoruvkaMST(int n, List<Edge> edges) {
+    public Boruvka(int n, List<Edge> edges) {
         super(n);
         this.E = edges;
         this.G = new int[vectorSize];
