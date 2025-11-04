@@ -2,7 +2,7 @@
 # Gradle
 # ====================================
 gradlew
-gradle.bat
+gradlew.bat
 ./gradle/*
 **/build/
 !gradle/wrapper/gradle-wrapper.jar
