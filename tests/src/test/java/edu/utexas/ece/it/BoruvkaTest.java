@@ -1,11 +1,11 @@
-package edu.utexas.ece.llp;
+package edu.utexas.ece.it;
 
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import edu.utexas.ece.llp.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MST {
+public class BoruvkaTest {
 
   private static List<Boruvka.Edge> edges(int... t) {
     List<Boruvka.Edge> e = new ArrayList<>();
