@@ -32,6 +32,6 @@ run_test "FastComponentTest"
 
 echo
 echo "=============================================================="
-echo " ✅ All algorithm tests completed successfully"
+echo " All algorithm tests completed successfully"
 echo "=============================================================="
 
