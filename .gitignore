@@ -1,16 +1,16 @@
 # ====================================
 # Gradle
 # ====================================
-gradlew
-gradlew.bat
-./gradle/*
+#gradlew
+#gradlew.bat
+#./gradle/*
 **/build/
-!gradle/wrapper/gradle-wrapper.jar
-!gradle/wrapper/gradle-wrapper.properties
+#!gradle/wrapper/gradle-wrapper.jar
+#!gradle/wrapper/gradle-wrapper.properties
 
 # Cache and lock files
-**/.gradle/
-.gradle/
+#**/.gradle/
+#.gradle/
 .gradle-build/
 gradle-app.setting
 **/out/
