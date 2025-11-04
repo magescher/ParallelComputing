@@ -24,7 +24,7 @@ public class PrefixSum extends LLP {
     }
 
     /**
-     *  See page 44 textbook. Note below psuedo assumes 1 index. Implementation assumes 0
+     *  See page 44 textbook. 
      *  - ensure: G[j] >= 0 if j = 1
      *  - ensure: G[j] >= G[j/2] if j is even
      *  - ensure: G[j] >= S[j - 1] + G[j/2] if j is odd and j < n

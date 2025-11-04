@@ -11,7 +11,7 @@ import java.util.Arrays;
  * ensure: G[j] = min{G[i] + w[i, j] | i inc in pre(j)}
  * 
  * @author Abigail Johnson
- * Inspired from Algorithm Provided by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
+ * Inspired from implementation by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
  */
 public class BellmanFord extends LLP {
 

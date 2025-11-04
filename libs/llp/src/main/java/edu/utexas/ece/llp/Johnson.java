@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Exposes the current potential vector via {@link #getSolution()}.
  *
  * @author Abigail Johnson
- * Inspired from Algorithm Provided by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
+ * Inspired from implementation by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
  */
 public class Johnson extends LLP {
 
