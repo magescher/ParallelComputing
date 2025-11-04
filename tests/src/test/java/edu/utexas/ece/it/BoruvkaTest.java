@@ -12,7 +12,7 @@ import java.util.List;
 class BoruvkaSimpleTest {
 
     @Test
-    void mstTinyFourNodeGraph() {
+    void mst_four_node() {
         // Graph:
         // 0–1 (1)
         // 1–2 (2)
@@ -29,12 +29,7 @@ class BoruvkaSimpleTest {
         edges.add(new Boruvka.Edge(1, 3, 5));
 
         Boruvka boruvka = new Boruvka(4, edges);
-
-        // Use the LLP engine’s fixpoint loop
-        boruvka.solve();
-
         List<Boruvka.Edge> mst = boruvka.getSolution();
-
         // Debug print (optional)
         int total = mst.stream().mapToInt(Boruvka.Edge::w).sum();
         System.out.println("MST edges:");
@@ -49,12 +44,3 @@ class BoruvkaSimpleTest {
     }
 }
 
-
-/*
- * Expected Result: 
- * MST edges:
-  (0,1) w=1
-  (1,2) w=2
-  (2,3) w=3
-Total weight = 6
- */
