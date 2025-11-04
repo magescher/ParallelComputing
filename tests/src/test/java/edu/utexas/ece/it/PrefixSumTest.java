@@ -38,3 +38,16 @@ class PrefixSumTest {
         assertArrayEquals(new int[]{2, 1, 4, 2}, result);
     }
 }
+
+
+/*
+ * Prefix sum Simple: [1, 3, 6, 10]
+Prefix Sum Test negative numbers: [2, 1, 4, 2]
+
+PrefixSumTest > testPrefixSumSimple PASSED
+PrefixSumTest > testAllZeros PASSED
+PrefixSumTest > testNegativeNumbers PASSED
+
+BUILD SUCCESSFUL
+
+ */
