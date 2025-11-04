@@ -19,3 +19,8 @@ Test
 ./gradlew :tests:test --rerun-tasks
 ```
 
+Run Test Script (redundant from above, but included per requirement)
+```bash 
+./scripts/run_llp.sh
+```
+
