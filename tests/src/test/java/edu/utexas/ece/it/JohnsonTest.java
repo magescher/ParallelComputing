@@ -18,7 +18,7 @@ import java.util.Arrays;
 class JohnsonTest {
 
     @Test
-    void smallThreeNodeCase() {
+    void shortest_path() {
         int[][] pre = {
             {},      // 0
             {0},     // 1
@@ -30,7 +30,6 @@ class JohnsonTest {
         w[0][2] =  1;
 
         Johnson j = new Johnson(pre, w);
-        j.solve();
         int[] G = j.getSolution();
 
         // This instance converges to:

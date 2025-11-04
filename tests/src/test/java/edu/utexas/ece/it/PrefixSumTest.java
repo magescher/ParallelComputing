@@ -11,7 +11,7 @@ import java.util.Arrays;
 class PrefixSumTest {
 
     @Test
-    public void testPrefixSumSimple() {
+    public void test_prefix_sum() {
         int[] A = {1, 2, 3, 4};
         int[] S = {3, 6, 10}; // internal partials not used in leaves but for tree completeness
         PrefixSum ps = new PrefixSum(A, S);
@@ -21,7 +21,7 @@ class PrefixSumTest {
     }
 
     @Test
-    public void testAllZeros() {
+    public void test_prefix_sum_zeros() {
         int[] A = {0, 0, 0, 0};
         int[] S = {0, 0, 0};
         PrefixSum ps = new PrefixSum(A, S);
@@ -29,7 +29,7 @@ class PrefixSumTest {
     }
 
     @Test
-    public void testNegativeNumbers() {
+    public void test_prefix_sum_negative() {
         int[] A = {2, -1, 3, -2};
         int[] S = {1, 2, 3};
         PrefixSum ps = new PrefixSum(A, S);
@@ -38,16 +38,3 @@ class PrefixSumTest {
         assertArrayEquals(new int[]{2, 1, 4, 2}, result);
     }
 }
-
-
-/*
- * Prefix sum Simple: [1, 3, 6, 10]
-Prefix Sum Test negative numbers: [2, 1, 4, 2]
-
-PrefixSumTest > testPrefixSumSimple PASSED
-PrefixSumTest > testAllZeros PASSED
-PrefixSumTest > testNegativeNumbers PASSED
-
-BUILD SUCCESSFUL
-
- */
