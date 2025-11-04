@@ -8,6 +8,7 @@ import java.util.Arrays;
  * Exposes the component labels via {@link #getSolution()}.
  * 
  * @author Abigail Johnson
+ * Inspired from Algorithm Provided by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
  */
 public class ConnectedComponents extends LLP {
 

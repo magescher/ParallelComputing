@@ -6,11 +6,12 @@ import java.util.Arrays;
  * Bellman–Ford (LLP variant): single-source shortest paths in a weighted digraph (no negative cycles).
  * Exposes the current distance vector via {@link #getSolution()}.
  *  
- * @author Abigail Johnson
- * 
  * input: pre(j): list of 1..n; w[i, j]: int for all i inc in pre(j)
  * init: if (j = s) then G[j] == 0 else G[j] = maxint;
  * ensure: G[j] = min{G[i] + w[i, j] | i inc in pre(j)}
+ * 
+ * @author Abigail Johnson
+ * Inspired from Algorithm Provided by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
  */
 public class BellmanFord extends LLP {
 

@@ -4,7 +4,8 @@ package edu.utexas.ece.llp;
  * Stable Matching (LLP variant): man-optimal matching.
  * Exposes proposal assignment via {@link #getSolution()}.
  * 
- * @author Abigail Johnson
+ *  @author Abigail Johnson
+ *  Inspired from Algorithm Provided by @author Vijay K Garg in "A Systematic Approach to Sequential Algorithms"
  */
 public class StableMatching extends LLP {
 
