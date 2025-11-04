@@ -11,7 +11,7 @@ import java.util.Arrays;
 class StableMarriageTest {
 
     @Test
-    void tinyTwoByTwo() {
+    void test_stable_matching() {
         int[][] mprefs = {
             {0, 1},  // m0 prefers w0 > w1
             {0, 1}   // m1 prefers w0 > w1

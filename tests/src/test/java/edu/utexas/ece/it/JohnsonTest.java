@@ -18,7 +18,7 @@ import java.util.Arrays;
 class JohnsonTest {
 
     @Test
-    void smallThreeNodeCase() {
+    void shortest_path() {
         int[][] pre = {
             {},      // 0
             {0},     // 1

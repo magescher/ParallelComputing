@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FastComponentTest {
     @Test
-    void fastComponents_returnsLabelsForAllVertices() {
+    void test_components() {
         int[][] adj = {
             {1, 2}, {0, 2}, {0, 1}, {4}, {3}
         };
