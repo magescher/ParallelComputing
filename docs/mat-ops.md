@@ -32,7 +32,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - Easy tie in to existing implementations (could build off LLP library even tho Java wouldn't be IRL best choice)
     - can tie to ahmeds (which we covered in class)
 
-**Overview**
+**Overview**  
 This paper analyzes the parallel structure of key linear-algebra kernels (LU factorization, matrix inversion, and determinant computation) that form the backbone of quantitative-finance analytics such as covariance inversion and portfolio optimization. Rather than chasing raw performance, we examine how data dependencies, triangular update patterns, and synchronization costs bound achievable speedup. By comparing fine-grained and block-level parallel decompositions, we illustrate where concurrency emerges and where it collapses, connecting these structural limits to the design choices behind modern financial-computing libraries.
 
 ## 1.2 Idea: Hybrid Parallelism for Financial Simulation Workloads
@@ -42,7 +42,7 @@ This paper analyzes the parallel structure of key linear-algebra kernels (LU fac
     - Applied, architectural, and industry aligned
     - More forward looking and impressive for interviews
 
-**Overview**
+**Overview**  
 This paper explores hybrid parallelism that combines task-level concurrency across financial-simulation scenarios with data-level parallelism inside linear-algebra kernels such as LU factorization, inversion, and determinant computation. The approach mirrors production risk and covariance-analysis pipelines that run large ensembles of correlated matrix solves. Through simple nested-parallel implementations, we evaluate how coarse- and fine-grained parallelism interact, identifying practical trade-offs in throughput, latency, and resource utilization for scalable quantitative-finance systems.
 
 # 2.0 Paper Outline
