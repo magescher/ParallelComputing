@@ -2,8 +2,8 @@
 
 - [x] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
 - [x] source. 
-- [ ] program to generate testcases. 
-- [ ] script that runs the program (tests below algorithms). 
+- [x] program to generate testcases. 
+- [x] script that runs the program (tests below algorithms). 
 
 #### Low Level Design
 
