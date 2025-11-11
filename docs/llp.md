@@ -2,10 +2,10 @@
 
 - [x] Java Library/API that allows one to use LLP parallel algorithms to solve problems.   
 - [x] source. 
-- [ ] program to generate testcases. 
-- [ ] script that runs the program (tests below algorithms). 
+- [x] program to generate testcases. 
+- [x] script that runs the program (tests below algorithms). 
 
-#### Low Level Design
+### Low Level Design
 
 ```uml
 + abstract class LLP
@@ -22,7 +22,7 @@ BellmanFord bf = new BellmanFord(pre, w);
 int[] dist = bf.getSolution();
 ```
 
-#### Applications
+### Applications
 
 ##### Parallel Prefix 
 - // Assume n is a power of 2 for simplicity
@@ -74,11 +74,7 @@ int[] dist = bf.getSolution();
 ##### Minimum Spanning Tree
 - Algorithm: Boruvka
 
-- TODO
-
-----------------------
-Notes
-----------------------
+### LLP Notes
 
 - Step 1: 
     - Model the underlying search space - a distributive lattice of state vectors. 
