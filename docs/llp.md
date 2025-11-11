@@ -74,8 +74,6 @@ int[] dist = bf.getSolution();
 ##### Minimum Spanning Tree
 - Algorithm: Boruvka
 
-- TODO
-
 ----------------------
 Notes
 ----------------------

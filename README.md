@@ -9,8 +9,9 @@ brew install temurin
 ```
 
 #### Example Usage
-```bash 
-./scripts/run_llp.sh
+```java
+BellmanFord bf = new BellmanFord(pre, w);
+int[] dist = bf.getSolution();
 ```
 
 #### Test
