@@ -4,7 +4,7 @@ Requirements and project outline for term paper on parallel algorithms for matri
 Topic: Implement parallel algorithms to solve linear systems, invert matrices, compute determinants, and LU factorizations
 
 **Task List**
-- [...] Topic Research
+- [x] Topic Research
 - [ ] Outline
     - [ ] Section Skeleton
     - [ ] Introduction / Thesis
@@ -13,7 +13,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [ ] invert matrices
     - [ ] compute determinants
     - [ ] LU factorizations
-- [ ] Algorithm Benchmarking
+- [ ] Benchmarking / Results / Discussion Points
 - [ ] Content Draft
 - [ ] Final Formatting Review
 - [ ] Powerpoint Presentation 
