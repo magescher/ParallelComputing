@@ -33,7 +33,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - can tie to ahmeds (which we covered in class)
 
 **Overview**  
-This paper analyzes the parallel structure of key linear-algebra kernels (LU factorization, matrix inversion, and determinant computation) that form the backbone of quantitative-finance analytics such as covariance inversion and portfolio optimization. Rather than chasing raw performance, we examine how data dependencies, triangular update patterns, and synchronization costs bound achievable speedup. By comparing fine-grained and block-level parallel decompositions, we illustrate where concurrency emerges and where it collapses, connecting these structural limits to the design choices behind modern financial-computing libraries.
+This paper examines the parallel structure of linear-algebra kernels that form the backbone of quantitative-finance analytics such as covariance inversion and portfolio optimization. Matops are a famously and well researched topic so, rather than chasing performance, we observe how data dependencies, triangular update patterns, and synchronization costs bound achievable speedup. By comparing fine-grained and block-level parallel decompositions, we illustrate where concurrency emerges and where it collapses, thus <explaining> the design choices behind modern financial-computing libraries.
 
 ## 1.2 Idea: Hybrid Parallelism for Financial Simulation Workloads
 - Scope: Parallelism across many independent or semi-independent matrix ops
@@ -43,7 +43,7 @@ This paper analyzes the parallel structure of key linear-algebra kernels (LU fac
     - More forward looking and impressive for interviews
 
 **Overview**  
-This paper explores hybrid parallelism that combines task-level concurrency across financial-simulation scenarios with data-level parallelism inside linear-algebra kernels such as LU factorization, inversion, and determinant computation. The approach mirrors production risk and covariance-analysis pipelines that run large ensembles of correlated matrix solves. Through simple nested-parallel implementations, we evaluate how coarse- and fine-grained parallelism interact, identifying practical trade-offs in throughput, latency, and resource utilization for scalable quantitative-finance systems.
+This paper explores hybrid forms of parallelism in quantitative-finance systems that rely on parallel matrix operations. Matops are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, we focus on how they are applied and scaled across distributed financial workloads. In practice, large-scale risk and covariance analyses often run many simulation scenarios at once, each involving matrix factorizations or inversions. By combining task-level parallelism across scenarios with data-level parallelism inside each matrix operation, we observe where concurrency delivers real gains and where contention starts to erode them, revealing practical trade-offs that shape the performance of modern financial-computing systems
 
 # 2.0 Paper Outline
 Title: X
