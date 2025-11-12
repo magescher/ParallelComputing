@@ -21,4 +21,12 @@ int[] dist = bf.getSolution();
 
 ## 2.0 Research
 Efficient algorithms for matrix mulitplications. 
-See docs/research for more information 
+See docs for more information 
+
+#### Hybrid Bench
+```
+python3 scripts/hybrid_bench.py --mode manyA --n 256 --S 256 --outer 8
+
+```
+
+
