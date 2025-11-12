@@ -43,7 +43,7 @@ This paper examines the parallel structure of linear-algebra kernels that form t
     - More forward looking and impressive for interviews
 
 **Overview**  
-This paper explores hybrid forms of parallelism in quantitative-finance systems that rely on parallel matrix operations. Matops are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, we focus on how they are applied and scaled across distributed financial workloads. In practice, large-scale risk and covariance analyses often run many simulation scenarios at once, each involving matrix factorizations or inversions. By combining task-level parallelism across scenarios with data-level parallelism inside each matrix operation, we observe where concurrency delivers real gains and where contention starts to erode them, revealing practical trade-offs that shape the performance of modern financial-computing systems
+This paper explores hybrid forms of parallelism in quantitative-finance systems that rely on parallel matrix operations. Matops are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, we focus on how they are employed and scaled in real-life industry applications. In practice, large-scale risk and covariance analyses often run many simulation scenarios at once, each involving matrix factorizations or inversions. By evaulating hybrid course-grained and fine-grained parallelism strategies, we observe practical trade-offs where concurrency delivers real gains and where contention starts to erode. 
 
 # 2.0 Paper Outline
 Title: X
