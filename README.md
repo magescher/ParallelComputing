@@ -40,6 +40,11 @@ VECLIB_MAXIMUM_THREADS=4 python3 scripts/hybrid_bench.py --mode sameA --n 256 --
 # On OpenBLAS systems (e.g., conda-forge environment):
 # Replace VECLIB_MAXIMUM_THREADS with OPENBLAS_NUM_THREADS or OMP_NUM_THREADS
 OPENBLAS_NUM_THREADS=4 python3 scripts/hybrid_bench.py --mode sameA --n 256 --S 256
+
+# Show how coarse-grained (task) parallelism scales with outer
+for o in 1 2 4 8; do
+  python3 scripts/hybrid_bench.py --mode manyA --n 256 --S 256 --outer $o
+done
 ```
 
 
