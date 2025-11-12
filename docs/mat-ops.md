@@ -5,14 +5,16 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
 
 **Task List**
 - [x] Topic Research
-- [ ] Outline
-    - [ ] Section Skeleton
-    - [ ] Introduction / Thesis
-    - [ ] Topic Statements
-- [ ] Algorithm / System Implementation
-    - [ ] invert matrices
-    - [ ] compute determinants
-    - [ ] LU factorizations
+- [...] Outline
+    - [X] Section Skeleton
+    - [X] Introduction / Thesis
+    - [...] Content Bullets
+    - [] Topic Statements
+- [...] Algorithm / System Implementation
+    - [X] runner / test bench
+    - [X] sameA
+    - [X] manyA
+    - [ ] ... ? TBD
 - [ ] Benchmarking / Results / Discussion Points
 - [ ] Content Draft
 - [ ] Final Formatting Review
