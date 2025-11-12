@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os, time, argparse, multiprocessing as mp
 
-# ---- set caps BEFORE importing numpy/scipy ----
 def set_blas_threads(n: int):
     for v in ("MKL_NUM_THREADS","OPENBLAS_NUM_THREADS","OMP_NUM_THREADS",
               "NUMEXPR_NUM_THREADS","VECLIB_MAXIMUM_THREADS"):
@@ -45,22 +44,17 @@ def bench_manyA(n: int, S: int, outer: int) -> dict:
             "throughput": S/dt, "sec": dt, "median_resid": float(np.median(resids))}
 
 def bench_sameA(n: int, S: int, outer: int) -> dict:
-    # For "same A", factor once in main, send params needed to workers if desired.
-    # Simpler: do solves in threads to avoid shipping big arrays between processes.
-    from concurrent.futures import ThreadPoolExecutor
-    #with threadpool_limits(limits=1, user_api=["blas","openmp"]):
-    with threadpool_limits(limits=1, user_api="blas"):
+    # Factor once; solve S right-hand-sides in a single batched call
+    with threadpool_limits(limits=1):
         A = spd(n, 42)
         lu, piv = lu_factor(A)
-        def solve_one(_):
-            x = lu_solve((lu, piv), np.ones(n))
-            return float(np.linalg.norm(A @ x - np.ones(n)) / np.linalg.norm(np.ones(n)))
+        B = np.ones((n, S))                     # S RHS columns
         t0 = time.perf_counter()
-        with ThreadPoolExecutor(max_workers=outer) as ex:
-            resids = list(ex.map(solve_one, range(S)))
+        X = lu_solve((lu, piv), B)              # vectorized solve (no thread pool)
         dt = time.perf_counter() - t0
+        resid = np.linalg.norm(A @ X - B) / np.linalg.norm(B)
     return {"workload":"sameA","n":n,"S":S,"outer":outer,"inner":1,
-            "throughput": S/dt, "sec": dt, "median_resid": float(np.median(resids))}
+            "throughput": S/dt, "sec": dt, "median_resid": float(resid)}
 
 # ---------- CLI + main ----------
 def main():
