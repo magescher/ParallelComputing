@@ -5,24 +5,26 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
 
 **Task List**
 - [x] Topic Research
-- [ ] Outline
+- [x] Written Content Outline
     - [X] Section Skeleton
     - [X] Introduction / Thesis
     - [X] Content Bullets
-    - [ ] Topic Statements
 - [ ] System Implementation
     - [X] base command line interface and runner
     - [ ] sameA module; fix. not properly testing fine grained 
     - [X] manyA module
     - [ ] improve aesthetics of command line output
-    - [ ] make runner more robust to variable runtime environments; current implemetation has some hardcoded/assumed configurations
+    - [ ] make runner more robust to variable runtime environments
     - [ ] script to automate runner for benchmarks and fixed simulation suite
-- [ ] Results / Discussion Points
     - [ ] Run simulatiom suite on 2-3 diff runtime environments
-    - [ ] Visuals / Tables
-    - [ ] Gather references to industry applications / parallels
-- [ ] Written Content Draft
-- [ ] Written Content Review
+- [ ] Draft Written Content
+    - [x] Introduction
+    - [x] Design
+    - [ ] Implementation
+    - [ ] Results
+    - [ ] Conclusion
+    - [ ] Abstract
+- [ ] Finalize Written Content 
 - [ ] Latex Translation and Final Formatting Review
 - [ ] Powerpoint Presentation 
 
