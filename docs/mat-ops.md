@@ -5,12 +5,12 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
 
 **Task List**
 - [x] Topic Research
-- [...] Outline
+- [ ] Outline
     - [X] Section Skeleton
     - [X] Introduction / Thesis
-    - [...] Content Bullets
+    - [X] Content Bullets
     - [] Topic Statements
-- [...] Algorithm / System Implementation
+- [ ] Algorithm / System Implementation
     - [X] runner / test bench
     - [X] sameA
     - [X] manyA
@@ -50,33 +50,46 @@ This paper explores hybrid forms of parallelism in quantitative-finance systems 
 # 2.0 Paper Outline
 Title: X
 
-## Abstract
-- Finalize at end. Collection of thesis and topic statements. 
-- Emphasize insights over raw performance (since matmul is well researched )
+#### 0.0 ABSTRACT
+- TODO
 
-## Introduction
-- Motivate with quant finance examples; state why linear systems are core
-- Mention goal: design alternatives and performance trade-offs
-- Thesis statement
+#### 1.0 INTRODUCTION 
+This paper explores hybrid forms of parallelism in quantitative-finance systems that rely on parallel matrix operations. Matrix operations are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, we focus on how they are employed and scaled in real-life industry applications. In practice, large-scale risk and covariance analyses often run many simulation scenarios at once, each involving matrix factorizations or inversions. <..elaborate..> By evaluating hybrid course-grained and fine-grained parallelism strategies, we observe practical trade-offs where concurrency delivers real gains and where contention starts to erode.
 
-## Project Description / Overview
+#### 2.0 APPROACH AND METHODOLOGY
+- Design Ethos - simulate real life applications while using abstractions where it makes sense; leverage simple interfaces to allow for ease of implementation while promoting future extensibility
 
-## Design Alternatives
-- Extend LLP vs various...
+#### 2.1 Design
+- Python3 + SciPy to leverage BLAS instead of implementing LU from scratch ; focus on workload simulation instead of low level optimizations (tradeoff w/ C/OpenMP; CUDA/CPU alternatives). Better simulates development environment of quantitative researcher, and <…blah…> 
+- High-level design of two modules (add figure?):
+    - manyA: course-grained (task-level) parallelism, solving independent matrixes with multiple processes
+    - sameA: fine-grained (kernel-level) parallelism, one factorization w/ many BLAS/RHS threads
+- Command line runner to allow configurable input parameters (ease of implementation and promote future extendability)
+- Matrix size(s) <default 256x256> and justifications <add/find references>
+- Hardware considerations
+- Assumptions/simplifications
+####  2.2 Implementation
+- Environment setup and BLAS configuration
+- Parallel constructs: ProcessPollExecutor, multithreading , - <...>
+- Pseudocode snippets for generating matrices, sameA, manyA, etc. 
+- Computation and correctness check
+- Benchmark measures
+- Experimental conditions (CPU models/cores..). <This section here, at environment setup, or below?>
+3.0 EVALUATION & RESULTS
+- Speedup curves (relative to <x?> baseline); include figure
+- Key Observations:
+    - manyA scales well up to outer=<x>, then oversubscribes CPU and throughput drops
+    - sameA: diminishing returns ?
 - ...
 
-## Implementation
-- describe platform (e.g., java vs cuda vs python multiprocessing, extend existing LLP libary, etc)
-- psuedocode / diagrams
+#### 4.0 DISCUSSION
+- Observed tradeoffs + technical justification
+- Where hybrid parallelization strategies pay off
+- Connect to real-world financial workloads and applications (risk engines, … , etc.) <add references to industry, published data by large hedge funds>. How quant systems actually choose parallel strategies <reference>
+- Takeaways that generalize beyond Python and tested experimental environment
+… ... 
 
-## Performance Results
-- compare small vs medium matrices vs <large?> (e.g., 256×256, 512×512, ...) with 1 vs 4 vs 8 threads
-- Plot speedup and discuss scalability limits
-- Compare with benchmarks?
-
-## Discussion / Industry Applications
-- Relevance to covariance inversion, risk models
-- Numerical stability, synchronization costs ?
-
-## Conclusion
-- summarize design lessons, link to quant applications
+#### 5.0 CONCLUSIONS & FUTURE WORK
+- Summary of findings (4.0)
+- Implications / implied best practice
+- Potential next steps / extensions
