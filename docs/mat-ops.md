@@ -13,10 +13,10 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] base command line interface and runner
     - [X] sameA module; fix. not properly testing fine grained 
     - [X] manyA module
-    - [ ] improve aesthetics of command line output
-    - [ ] make runner more robust to variable runtime environments
+    - [X] improve aesthetics of command line output
     - [X] script to automate runner for benchmarks and fixed simulation suite
-    - [ ] Run simulatiom suite on 2-3 diff runtime environments
+    - [ ] make runner more robust to variable runtime environments
+    - [ ] Run simulatiom suite on 2-3 diff runtime environments 
 - [ ] Draft Written Content
     - [x] Introduction
     - [x] Design

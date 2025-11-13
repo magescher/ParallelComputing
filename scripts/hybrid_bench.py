@@ -17,7 +17,10 @@ from threadpoolctl import threadpool_limits
 import faulthandler; faulthandler.enable()
 
 
-# Top-level worker functions 
+# ---------------------------------------------------------------------
+# Core workloads
+# ---------------------------------------------------------------------
+
 def spd(n: int, lam=1e-3, seed=0):
     rng = np.random.default_rng(seed)
     X = rng.standard_normal((n, n))
@@ -54,7 +57,29 @@ def bench_sameA(n: int, S: int, inner: int) -> dict:
     return { "workload": "sameA", "n": n, "S": S, "outer": 1, "inner": inner,
             "throughput": S/dt, "sec": dt, "median_resid": float(resid) }
 
-# ---------- CLI + main ----------
+
+# ---------------------------------------------------------------------
+# Pretty-print helpers
+# ---------------------------------------------------------------------
+
+def format_header() -> str:
+    return (
+        f"{'mode':>6}  {'n':>6}  {'S':>6}  "
+        f"{'outer':>5}  {'inner':>5}  "
+        f"{'sec':>10}  {'throughput':>12}  {'resid':>12}"
+    )
+
+def format_result(res: dict) -> str:
+    return (
+        f"{res['workload']:>6}  "
+        f"{res['n']:6d}  {res['S']:6d}  "
+        f"{res['outer']:5d}  {res['inner']:5d}  "
+        f"{res['sec']:10.4f}  {res['throughput']:12.2f}  {res['median_resid']:12.3e}"
+    )
+
+# ---------------------------------------------------------------------
+# CLI/main
+# ---------------------------------------------------------------------
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--n", type=int, default=256)
@@ -64,6 +89,10 @@ def main():
     p.add_argument("--inner", type=int, default=1,
         help="kernel-level parallelism (BLAS threads per process)")
     p.add_argument("--mode", choices=["manyA","sameA"], default="manyA")  
+    p.add_argument("--pretty", action="store_true",
+        help="print a single formatted table row instead of a raw dict")
+    p.add_argument("--print-header", action="store_true",
+        help="print a table header and exit")
     args = p.parse_args()
 
     try:
@@ -71,10 +100,20 @@ def main():
     except RuntimeError:
         pass
 
+    # If we only want the header, don't run the benchmark at all
+    if args.print_header:
+        print(format_header())
+        return
+
     if args.mode == "manyA":
-        print(bench_manyA(args.n, args.S, args.inner, args.outer))
+        result = bench_manyA(args.n, args.S, args.inner, args.outer)
     else:
-        print(bench_sameA(args.n, args.S, args.inner))
+        result = bench_sameA(args.n, args.S, args.inner)
+
+    if args.pretty:
+        print(format_result(result))
+    else:
+        print(result)
 
 if __name__ == "__main__":
     main()
