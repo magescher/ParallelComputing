@@ -3,7 +3,7 @@
 # Hybrid parallelism benchmark driver
 # - Coarse-grained (task-level) sweeps
 # - Fine-grained (kernel-level) sweeps
-# - Hybrid (outer × inner) grid under a core budget
+# - Hybrid (outer x inner) grid under a core budget
 # ---------------------------------------------------------------------
 
 set -euo pipefail
