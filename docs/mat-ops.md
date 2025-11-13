@@ -10,14 +10,20 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] Introduction / Thesis
     - [X] Content Bullets
     - [ ] Topic Statements
-- [ ] Algorithm / System Implementation
-    - [X] runner / test bench
-    - [X] sameA
-    - [X] manyA
-    - [ ] ... ? TBD
-- [ ] Benchmarking / Results / Discussion Points
-- [ ] Content Draft
-- [ ] Final Formatting Review
+- [ ] System Implementation
+    - [X] base command line interface and runner
+    - [ ] sameA module; fix. not properly testing fine grained 
+    - [X] manyA module
+    - [ ] improve aesthetics of command line output
+    - [ ] make runner more robust to variable runtime environments; current implemetation has some hardcoded/assumed configurations
+    - [ ] script to automate runner for benchmarks and fixed simulation suite
+- [ ] Results / Discussion Points
+    - [ ] Run simulatiom suite on 2-3 diff runtime environments
+    - [ ] Visuals / Tables
+    - [ ] Gather references to industry applications / parallels
+- [ ] Written Content Draft
+- [ ] Written Content Review
+- [ ] Latex Translation and Final Formatting Review
 - [ ] Powerpoint Presentation 
 
 **Requirements**
