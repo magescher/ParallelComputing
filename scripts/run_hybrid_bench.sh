@@ -114,6 +114,10 @@ EOF
 
   for o in "${OUTER_SWEEP[@]}"; do
     for i in "${INNER_SWEEP[@]}"; do
+      # Skip cases where outer==1 or inner==1
+      if (( o == 1 )) || (( i == 1 )); then
+        continue
+      fi
       total=$(( o * i ))
       if (( total > CORES )); then
         printf "# Skipping outer=%d, inner=%d → total=%d > CORES=%d\n" \
