@@ -75,7 +75,8 @@ This paper explores hybrid forms of parallelism in quantitative-finance systems 
 - Computation and correctness check
 - Benchmark measures
 - Experimental conditions (CPU models/cores..). <This section here, at environment setup, or below?>
-3.0 EVALUATION & RESULTS
+
+#### 3.0 EVALUATION & RESULTS
 - Speedup curves (relative to <x?> baseline); include figure
 - Key Observations:
     - manyA scales well up to outer=<x>, then oversubscribes CPU and throughput drops
