@@ -34,35 +34,38 @@ def scenario_manyA(n: int, seed: int):
         x = lu_solve((lu, piv), b)
         return float(np.linalg.norm(A @ x - b) / np.linalg.norm(b))
 
-def bench_manyA(n: int, S: int, outer: int) -> dict:
-    ctx = mp.get_context("spawn")                 # critical on macOS
+def bench_manyA(n: int, S: int, inner: int, outer: int) -> dict:
+    ctx = mp.get_context("spawn")                
     t0 = time.perf_counter()
     with ProcessPoolExecutor(max_workers=outer, mp_context=ctx) as ex:
         resids = list(ex.map(scenario_manyA, [n]*S, range(S)))
     dt = time.perf_counter() - t0
-    return {"workload":"manyA","n":n,"S":S,"outer":outer,"inner":1,
+    return {"workload":"manyA","n":n,"S":S,"outer":outer,"inner":inner,
             "throughput": S/dt, "sec": dt, "median_resid": float(np.median(resids))}
 
-def bench_sameA(n: int, S: int, outer: int) -> dict:
-    # Factor once; solve S right-hand-sides in a single batched call
-    with threadpool_limits(limits=1):
+def bench_sameA(n: int, S: int, inner: int) -> dict:
+    # fine-grained: single process, BLAS threads = inner
+    with threadpool_limits(limits=inner, user_api="blas"):
         A = spd(n, 42)
         lu, piv = lu_factor(A)
-        B = np.ones((n, S))                     # S RHS columns
+        B = np.ones((n, S))
         t0 = time.perf_counter()
-        X = lu_solve((lu, piv), B)              # vectorized solve (no thread pool)
+        X = lu_solve((lu, piv), B)
         dt = time.perf_counter() - t0
         resid = np.linalg.norm(A @ X - B) / np.linalg.norm(B)
-    return {"workload":"sameA","n":n,"S":S,"outer":outer,"inner":1,
-            "throughput": S/dt, "sec": dt, "median_resid": float(resid)}
+    return { "workload": "sameA", "n": n, "S": S, "outer": 1, "inner": inner,
+            "throughput": S/dt, "sec": dt, "median_resid": float(resid) }
 
 # ---------- CLI + main ----------
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--n", type=int, default=256)
     p.add_argument("--S", type=int, default=256)
-    p.add_argument("--outer", type=int, default=os.cpu_count() or 4)
-    p.add_argument("--mode", choices=["manyA","sameA"], default="manyA")  # ← add
+    p.add_argument("--outer", type=int, default=os.cpu_count() or 4,
+        help="task-level parallelism (number of processes)")
+    p.add_argument("--inner", type=int, default=1,
+        help="kernel-level parallelism (BLAS threads per process)")
+    p.add_argument("--mode", choices=["manyA","sameA"], default="manyA")  
     args = p.parse_args()
 
     try:
@@ -71,9 +74,9 @@ def main():
         pass
 
     if args.mode == "manyA":
-        print(bench_manyA(args.n, args.S, args.outer))
+        print(bench_manyA(args.n, args.S, args.inner, args.outer))
     else:
-        print(bench_sameA(args.n, args.S, args.outer))
+        print(bench_sameA(args.n, args.S, args.inner))
 
 if __name__ == "__main__":
     main()
