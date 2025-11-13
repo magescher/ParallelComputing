@@ -72,7 +72,8 @@ run_coarse_sweep() {
       --n "${N}" \
       --S "${S}" \
       --outer "${o}" \
-      --inner 1
+      --inner 1 \
+      --pretty 
     echo
   done
 }
@@ -93,7 +94,8 @@ run_fine_sweep() {
       --n "${N}" \
       --S "${S}" \
       --outer 1 \
-      --inner "${i}"
+      --inner "${i}" \
+      --pretty
     echo
   done
 }
