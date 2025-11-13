@@ -24,27 +24,8 @@ Efficient algorithms for matrix mulitplications.
 See [docs](./docs/mat-ops.md) for more information 
 
 #### Hybrid Bench
-```
-# Task-Level Parallelism (Coarse)
-# Multiple independent matrices solved concurrently across processes
-python3 scripts/hybrid_bench.py --mode manyA --n 256 --S 256 --outer 8
-
-# Data-Level Parallelism (Fine, Single Thread)
-# One matrix factorized once; multiple RHS solves with BLAS single-threaded
-VECLIB_MAXIMUM_THREADS=1 python3 scripts/hybrid_bench.py --mode sameA --n 256 --S 256
-
-# Data-Level Parallelism (Fine, 4 Threads)
-# Same matrix workload but allow BLAS (Accelerate) to use 4 threads internally
-VECLIB_MAXIMUM_THREADS=4 python3 scripts/hybrid_bench.py --mode sameA --n 256 --S 256
-
-# On OpenBLAS systems (e.g., conda-forge environment):
-# Replace VECLIB_MAXIMUM_THREADS with OPENBLAS_NUM_THREADS or OMP_NUM_THREADS
-OPENBLAS_NUM_THREADS=4 python3 scripts/hybrid_bench.py --mode sameA --n 256 --S 256
-
-# Show how coarse-grained (task) parallelism scales with outer
-for o in 1 2 4 8; do
-  python3 scripts/hybrid_bench.py --mode manyA --n 256 --S 256 --outer $o
-done
+```bash
+./scripts/run_hybrid_bench.sh
 ```
 
 
