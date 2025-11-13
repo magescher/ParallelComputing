@@ -9,7 +9,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] Section Skeleton
     - [X] Introduction / Thesis
     - [X] Content Bullets
-    - [] Topic Statements
+    - [ ] Topic Statements
 - [ ] Algorithm / System Implementation
     - [X] runner / test bench
     - [X] sameA
