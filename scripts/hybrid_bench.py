@@ -17,7 +17,10 @@ from threadpoolctl import threadpool_limits
 import faulthandler; faulthandler.enable()
 
 
-# Top-level worker functions 
+# ---------------------------------------------------------------------
+# Core workloads
+# ---------------------------------------------------------------------
+
 def spd(n: int, lam=1e-3, seed=0):
     rng = np.random.default_rng(seed)
     X = rng.standard_normal((n, n))
@@ -87,7 +90,9 @@ def main():
         help="kernel-level parallelism (BLAS threads per process)")
     p.add_argument("--mode", choices=["manyA","sameA"], default="manyA")  
     p.add_argument("--pretty", action="store_true",
-        help="print a one-line, human-readable summary instead of a raw dict")
+        help="print a single formatted table row instead of a raw dict")
+    p.add_argument("--print-header", action="store_true",
+        help="print a table header and exit")
     args = p.parse_args()
 
     try:
@@ -95,13 +100,17 @@ def main():
     except RuntimeError:
         pass
 
+    # If we only want the header, don't run the benchmark at all
+    if args.print_header:
+        print(format_header())
+        return
+
     if args.mode == "manyA":
         result = bench_manyA(args.n, args.S, args.inner, args.outer)
     else:
         result = bench_sameA(args.n, args.S, args.inner)
 
     if args.pretty:
-        print(format_header())
         print(format_result(result))
     else:
         print(result)

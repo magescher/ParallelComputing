@@ -31,8 +31,9 @@ PY
 # ---------------------------------------------------------------------
 # Pretty printing helpers
 # ---------------------------------------------------------------------
+
 hr() {
-  printf '%*s\n' 62 '' | tr ' ' '='
+  printf '%*s\n' 70 '' | tr ' ' '='
 }
 
 section() {
@@ -42,16 +43,6 @@ section() {
   hr
 }
 
-subsection() {
-  echo
-  echo "---- $1 ----"
-}
-
-cmd() {
-  echo "  $*"
-  "$@"
-}
-
 # ---------------------------------------------------------------------
 # Workload runners
 # ---------------------------------------------------------------------
@@ -59,72 +50,84 @@ cmd() {
 run_coarse_sweep() {
   section "Coarse-grained parallelism (task-level) — manyA"
 
-  echo "Description:"
-  echo "  - Many independent scenarios (matrices) solved in parallel."
-  echo "  - Varying outer (number of worker processes), inner=1 BLAS thread."
-  echo "  - This emulates Monte Carlo / stress tests / daily risk fan-out."
+  cat <<EOF
+Description:
+  - Many independent scenarios (matrices) solved in parallel.
+  - Varying outer (number of worker processes), inner=1 BLAS thread.
+  - Emulates Monte Carlo / stress tests / daily risk fan-out.
+
+EOF
+
+  # Print table header once
+  python3 "${BENCH}" --print-header
   echo
 
   for o in "${OUTER_SWEEP[@]}"; do
-    subsection "manyA: n=${N}, S=${S}, outer=${o}, inner=1"
-    cmd python3 "${BENCH}" \
+    python3 "${BENCH}" \
       --mode manyA \
       --n "${N}" \
       --S "${S}" \
       --outer "${o}" \
       --inner 1 \
-      --pretty 
-    echo
+      --pretty
   done
 }
 
 run_fine_sweep() {
   section "Fine-grained parallelism (kernel-level) — sameA"
 
-  echo "Description:"
-  echo "  - Single shared matrix factorization reused across many RHS."
-  echo "  - Single process (outer=1), varying inner (BLAS threads)."
-  echo "  - This emulates portfolio risk attribution / Greeks / factor models."
+  cat <<EOF
+Description:
+  - Single shared matrix factorization reused across many RHS.
+  - Single process (outer=1), varying inner (BLAS threads).
+  - Emulates portfolio risk attribution / Greeks / factor models.
+
+EOF
+
+  python3 "${BENCH}" --print-header
   echo
 
   for i in "${INNER_SWEEP[@]}"; do
-    subsection "sameA: n=${N}, S=${S}, outer=1, inner=${i}"
-    cmd python3 "${BENCH}" \
+    python3 "${BENCH}" \
       --mode sameA \
       --n "${N}" \
       --S "${S}" \
       --outer 1 \
       --inner "${i}" \
       --pretty
-    echo
   done
 }
 
 run_hybrid_grid() {
-  section "Hybrid parallelism (task × kernel) — manyA"
+  section "Hybrid parallelism (task x kernel) — manyA"
 
-  echo "Description:"
-  echo "  - Combine task-level and kernel-level parallelism."
-  echo "  - Outer = processes, inner = BLAS threads per process."
-  echo "  - Skip configurations where outer × inner exceeds ${CORES} cores."
+  cat <<EOF
+Description:
+  - Combine task-level and kernel-level parallelism.
+  - Outer = processes, inner = BLAS threads per process.
+  - Skip configurations where outer x inner exceeds ${CORES} cores.
+
+EOF
+
+  python3 "${BENCH}" --print-header
   echo
 
   for o in "${OUTER_SWEEP[@]}"; do
     for i in "${INNER_SWEEP[@]}"; do
       total=$(( o * i ))
       if (( total > CORES )); then
-        echo "Skipping (outer=${o}, inner=${i}) → total threads=${total} > CORES=${CORES}"
+        printf "# Skipping outer=%d, inner=%d → total=%d > CORES=%d\n" \
+          "$o" "$i" "$total" "$CORES"
         continue
       fi
 
-      subsection "HYBRID manyA: n=${N}, S=${S}, outer=${o}, inner=${i} (total threads ≈ ${total})"
-      cmd python3 "${BENCH}" \
+      python3 "${BENCH}" \
         --mode manyA \
         --n "${N}" \
         --S "${S}" \
         --outer "${o}" \
-        --inner "${i}"
-      echo
+        --inner "${i}" \
+        --pretty
     done
   done
 }
