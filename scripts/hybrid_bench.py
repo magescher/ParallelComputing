@@ -30,7 +30,7 @@ def scenario_manyA(n: int, seed: int, inner:int):
         b = np.ones(n)
         lu, piv = lu_factor(A)
         x = lu_solve((lu, piv), b)
-        return float(np.linalg.norm(A @ x - b) / np.linalg.norm(b)
+        return float(np.linalg.norm(A @ x - b) / np.linalg.norm(b))
 
 def bench_manyA(n: int, S: int, inner: int, outer: int) -> dict:
     ctx = mp.get_context("spawn")                
