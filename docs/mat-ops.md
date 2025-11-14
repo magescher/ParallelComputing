@@ -21,8 +21,8 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [x] Introduction
     - [x] Design
     - [x] Implementation
-    - [ ] Results
-    - [ ] Discussion
+    - [x] Results
+    - [x] Discussion
     - [ ] Conclusion
     - [x] Abstract
 - [ ] Finalize Written Content 
