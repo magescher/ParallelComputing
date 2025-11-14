@@ -16,7 +16,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] improve aesthetics of command line output
     - [X] script to automate runner for benchmarks and fixed simulation suite
     - [ ] make runner more robust to variable runtime environments
-    - [ ] Run simulatiom suite on 2-3 diff runtime environments 
+    - [x] Run simulatiom suite on 2-3 diff runtime environments 
 - [ ] Draft Written Content
     - [x] Introduction
     - [x] Design
