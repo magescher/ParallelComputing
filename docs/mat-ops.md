@@ -173,3 +173,76 @@ Description:
 ======================================================================
 ```
 
+
+M4 Pro 
+```bash
+Machine 2
+```bash
+======================================================================
+  Hybrid Parallelism Benchmark Suite
+======================================================================
+Benchmark script     : /Users/abigail/Documents/programming/workspace/ParallelComputing/scripts/hybrid_bench.py
+Detected CPU cores   : 12
+Matrix dimension (n) : 256
+RHS / scenarios (S)  : 256
+OUTER sweep          : 1 2 4 8
+INNER sweep          : 1 2 4 8
+======================================================================
+
+
+======================================================================
+  Coarse-grained parallelism (task-level) — manyA
+======================================================================
+Description:
+  - Many independent scenarios (matrices) solved in parallel.
+  - Varying outer (number of worker processes), inner=1 BLAS thread.
+  - Emulates Monte Carlo / stress tests / daily risk fan-out.
+
+  mode       n       S  outer  inner         sec    throughput         resid
+
+ manyA     256     256      1      1      0.3810        671.98     1.290e-15
+ manyA     256     256      2      1      0.2783        919.85     1.290e-15
+ manyA     256     256      4      1      0.2314       1106.38     1.290e-15
+ manyA     256     256      8      1      0.2265       1130.48     1.290e-15
+
+======================================================================
+  Fine-grained parallelism (kernel-level) — sameA
+======================================================================
+Description:
+  - Single shared matrix factorization reused across many RHS.
+  - Single process (outer=1), varying inner (BLAS threads).
+  - Emulates portfolio risk attribution / Greeks / factor models.
+
+  mode       n       S  outer  inner         sec    throughput         resid
+
+ sameA     256     256      1      1      0.0003     928660.05     2.305e-15
+ sameA     256     256      1      2      0.0003    1001956.95     2.305e-15
+ sameA     256     256      1      4      0.0003     956859.11     2.305e-15
+ sameA     256     256      1      8      0.0003     965429.33     2.305e-15
+
+======================================================================
+  Hybrid parallelism (task x kernel) — manyA
+======================================================================
+Description:
+  - Combine task-level and kernel-level parallelism.
+  - Outer = processes, inner = BLAS threads per process.
+  - Skip configurations where outer x inner exceeds 12 cores.
+
+  mode       n       S  outer  inner         sec    throughput         resid
+
+ manyA     256     256      2      2      0.2788        918.33     1.290e-15
+ manyA     256     256      2      4      0.2794        916.15     1.290e-15
+# Skipping outer=2, inner=8 → total=16 > CORES=12
+ manyA     256     256      4      2      0.2305       1110.56     1.290e-15
+# Skipping outer=4, inner=4 → total=16 > CORES=12
+# Skipping outer=4, inner=8 → total=32 > CORES=12
+# Skipping outer=8, inner=2 → total=16 > CORES=12
+# Skipping outer=8, inner=4 → total=32 > CORES=12
+# Skipping outer=8, inner=8 → total=64 > CORES=12
+
+======================================================================
+  All benchmarks complete
+======================================================================
+```
+```
+
