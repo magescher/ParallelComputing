@@ -18,14 +18,16 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [ ] make runner more robust to variable runtime environments
     - [x] Run simulatiom suite on 2-3 diff runtime environments 
 - [ ] Draft Written Content
-    - [x] Introduction
+    - [x] Introduction (needs some work)
     - [x] Design
     - [x] Implementation
     - [x] Results
     - [x] Discussion
-    - [ ] Conclusion
+    - [x] Conclusion
     - [x] Abstract
-- [ ] Finalize Written Content 
+- [x] Finalize Written Content 
+- [ ] Images and Figures
+- [ ] Format and review references
 - [ ] Latex Translation and Final Formatting Review
 - [ ] Powerpoint Presentation 
 
