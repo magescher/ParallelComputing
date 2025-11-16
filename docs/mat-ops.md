@@ -9,7 +9,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] Section Skeleton
     - [X] Introduction / Thesis
     - [X] Content Bullets
-- [ ] System Implementation
+- [x] System Implementation
     - [X] base command line interface and runner
     - [X] sameA module; fix. not properly testing fine grained 
     - [X] manyA module
@@ -17,7 +17,7 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [X] script to automate runner for benchmarks and fixed simulation suite
     - [ ] make runner more robust to variable runtime environments
     - [x] Run simulatiom suite on 2-3 diff runtime environments 
-- [ ] Draft Written Content
+- [x] Draft Written Content
     - [x] Introduction (needs some work)
     - [x] Design
     - [x] Implementation
@@ -26,10 +26,12 @@ Topic: Implement parallel algorithms to solve linear systems, invert matrices, c
     - [x] Conclusion
     - [x] Abstract
 - [x] Finalize Written Content 
-- [ ] Images and Figures
-- [ ] Appendix
-- [ ] Format and review references
 - [ ] Latex Translation and Final Formatting Review
+    - [ ] Body
+    - [ ] Keywords
+    - [ ] Images and Figures
+    - [ ] Appendix
+    - [ ] References (format and review)
 - [ ] Powerpoint Presentation 
 
 **Requirements**
