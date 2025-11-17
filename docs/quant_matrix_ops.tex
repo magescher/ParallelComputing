@@ -12,7 +12,6 @@
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
-\usepackage{lipsum}			% Can be removed after putting your text content
 \usepackage{graphicx}
 \usepackage{natbib}
 \usepackage{doi}
@@ -33,22 +32,18 @@
 	    \texttt{abigailjohnson@utexas.edu} \\
     }
 
-% Uncomment to remove the date
-%\date{}
-
-% Uncomment to override  the `A preprint' in the header
-%\renewcommand{\headeright}{Technical Report}
-%\renewcommand{\undertitle}{Technical Report}
+\renewcommand{\headeright}{Technical Report}
+\renewcommand{\undertitle}{Technical Report}
 \renewcommand{\shorttitle}{Parallel Matrix Computations in Quantitative Finance}
 
 %%% Add PDF metadata to help others organize their library
 %%% Once the PDF is generated, you can check the metadata with
 %%% $ pdfinfo template.pdf
 \hypersetup{
-pdftitle={A template for the arxiv style},
+pdftitle={Parallel Matrix Computations in Quantitative Finance},
 pdfsubject={q-bio.NC, q-bio.QM},
 pdfauthor={Abigail M.~Johnson},
-pdfkeywords={First keyword, Second keyword, More},
+pdfkeywords={Parallel Computing, Matrix Operations, Quantitative Finance, Performance, Benchmark},
 }
 
 \begin{document}
@@ -124,6 +119,30 @@ Table 1~\ref{tab:table1}. below details the results of running the benchmark sui
            test type and machine.}
   \label{tab:hybrid-bench-m1-m4}
 \end{table}
+
+\begin{figure}[H]
+\centering
+
+% ---- Figure 1 placeholder ----
+\begin{minipage}{0.45\textwidth}
+\centering
+\fbox{\rule{0pt}{1in}\rule{0.9\textwidth}{0pt}}
+\caption*{\textbf{Figure 1.} Placeholder Plot}
+\label{fig:placeholder1}
+\end{minipage}
+\hfill
+% ---- Figure 2 placeholder ----
+\begin{minipage}{0.45\textwidth}
+\centering
+\fbox{\rule{0pt}{1in}\rule{0.9\textwidth}{0pt}}
+\caption*{\textbf{Figure 2.} Placeholder Plot}
+\label{fig:placeholder2}
+\end{minipage}
+
+\caption{Placeholder side-by-side figures for upcoming plots.}
+\label{fig:two-side-by-side}
+\end{figure}
+
 
 
 \section{Discussion}
