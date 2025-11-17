@@ -25,8 +25,8 @@
 	{
 		\includegraphics[scale=0.06]{orcid.pdf}
 		\hspace{1mm}Abigail M. ~Johnson}
-		\thanks{} \\
-	    Chandra Department of Electrical and Computer Engineering\\
+		\thanks{https://github.com/magescher/ParallelComputing} \\
+	    Chandra Department of Electrical and Computer Engineering \\
 	    The University of Texas at Austin\\
 	    Austin, TX 78712 \\
 	    \texttt{abigailjohnson@utexas.edu} \\
@@ -59,7 +59,7 @@ This paper explores fine, course, and hybrid forms of parallelism in matrix comp
     \and Performance \and Benchmark}
 
 \section{Introduction}
-This paper explores fine, course, and hybrid forms of parallelism in matrix computations common in the quantitative finance industry. Matrix operations are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, I focus on how they are employed and scaled in real-life applications. In practice, there are many quantitative finance applications that generalize to two popular workflows: 1) using a single matrix factorization to solve many right hand side (RHS) equations and 2) factorizing and solving many independent matrices. By evaluating variable parallelism strategies within these workload types, we observe where concurrency delivers real gains and where contention starts to erode, and the practical tradeoffs therein.
+This paper explores fine, course, and hybrid forms of parallelism in matrix computations common in the quantitative finance industry. Matrix operations are a well-studied and highly optimized area, so instead of trying to outperform existing libraries, I focus on how they are employed and scaled in real-life applications. In practice, there are many quantitative finance applications that generalize to two popular workflows: 1) using a single matrix factorization to solve many right hand side equations and 2) factorizing and solving many independent matrices. By evaluating variable parallelism strategies within these workload types, we observe where concurrency delivers real gains and where contention starts to erode, and the practical tradeoffs therein.
 
 \section{Approach and Methodology}
 \label{sec:headings}
@@ -76,21 +76,21 @@ Both modules, $sameA$ and $manyA$, leverage the $spd$ helper to construct random
 
 \section{Results}
 \label{sec:headings}
-Table 1 ~\ref{tab:table1} below details the results of running the benchmark suite configured for $256 x 256$ matrix ($n=256$) and 256 scenarios ($S=256$) on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in Figure 1, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, absolute throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
+Table 1 ~\ref{tab:table1} below details the results of running the benchmark suite configured for $256 x 256$ matrix ($n=256$) and 256 scenarios ($S=256$) on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in Figure 1 ~\ref{fig:figure1}, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, absolute throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
 
 
 \begin{figure}[H]  
   \centering
-  \includegraphics[width=1\textwidth]{RelativeSpeedup.png}
-  \caption{Relative speedup of coarse (\texttt{manyA}) and fine
-  (\texttt{sameA}) workloads on a 2020 Apple M1 (8-core) and a 2024 Apple M4 Pro
-  (12-core). Throughput for each curve is normalized to the $p=1$ configuration.}
-  \label{fig:relative-speedup}
+  \label{fig:figure1}
+  \includegraphics[width=1\textwidth]{./benchmark_speedup_relative.png}
+   %%% \caption{Relative speedup of coarse (\texttt{manyA}) and fine
+  %%% (\texttt{sameA}) workloads on a 2020 Apple M1 (8-core) and a 2024 Apple M4 Pro
+  %%% (12-core). Throughput for each curve is normalized to the $p=1$ configuration.}
 \end{figure}
 
 
 \begin{table}[H]
-  \label{table1}
+  \label{tab:table1}
   \caption{Benchmark Performance Results}
   \centering
   \small
