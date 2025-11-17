@@ -21,7 +21,7 @@ int[] dist = bf.getSolution();
 
 ## 2.0 Research
 Efficient algorithms for matrix mulitplications. 
-See [docs](./docs/mat-ops.md) for more information 
+See [docs](./docs/planning/mat-ops.md) for more information 
 
 #### Hybrid Bench
 ```bash
