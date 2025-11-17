@@ -78,17 +78,6 @@ Both modules, $sameA$ and $manyA$, leverage the $spd$ helper to construct random
 \label{sec:headings}
 Table 1 ~\ref{tab:table1} below details the results of running the benchmark suite configured for $256 x 256$ matrix ($n=256$) and 256 scenarios ($S=256$) on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in Figure 1 ~\ref{fig:figure1}, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, absolute throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
 
-
-\begin{figure}[H]  
-  \centering
-  \label{fig:figure1}
-  \includegraphics[width=1\textwidth]{./benchmark_speedup_relative.png}
-   %%% \caption{Relative speedup of coarse (\texttt{manyA}) and fine
-  %%% (\texttt{sameA}) workloads on a 2020 Apple M1 (8-core) and a 2024 Apple M4 Pro
-  %%% (12-core). Throughput for each curve is normalized to the $p=1$ configuration.}
-\end{figure}
-
-
 \begin{table}[H]
   \label{tab:table1}
   \caption{Benchmark Performance Results}
@@ -125,6 +114,16 @@ Table 1 ~\ref{tab:table1} below details the results of running the benchmark sui
   \end{tabular}
   %\caption{}
 \end{table}
+
+\begin{figure}[H]  
+  \centering
+  \label{fig:figure1}
+  \caption{Relative speedup of coarse and fine grained parallism}
+  \includegraphics[width=.7\textwidth]{./benchmark_speedup_relative.png}
+   %%% \caption{Relative speedup of coarse (\texttt{manyA}) and fine
+  %%% (\texttt{sameA}) workloads on a 2020 Apple M1 (8-core) and a 2024 Apple M4 Pro
+  %%% (12-core). Throughput for each curve is normalized to the $p=1$ configuration.}
+\end{figure}
 
 
 \section{Discussion}
