@@ -1,4 +1,7 @@
 \documentclass{article}
+\usepackage{setspace}
+\usepackage{float}
+\doublespacing
 
 \usepackage{arxiv}
 \usepackage[utf8]{inputenc} % allow utf-8 input
@@ -76,7 +79,52 @@ Both modules, sameA and manyA, leverage the “spd” helper to construct random
 
 \section{Results}
 \label{sec:headings}
-Table 1 below details the results of running the benchmark suite configured for 256x256 matrix and 256 scenarios on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in <Figure Y>, performance improvements for fine grained parallelism quickly plateaus, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
+Table 1~\ref{tab:table1}. below details the results of running the benchmark suite configured for 256x256 matrix and 256 scenarios on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in <Figure Y>, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
+
+
+\begin{table}[H]
+  \label{table1}
+  \caption{Benchmark Performance Results}
+  \centering
+  \small
+  \begin{tabular}{lrrrrrrrrrr}
+    \toprule
+    Test type &
+    outer & inner & $n$ & $S$ &
+    \multicolumn{3}{c}{Apple M1 (8-core)} &
+    \multicolumn{3}{c}{Apple M4 Pro (12-core)} \\
+    \cmidrule(lr){6-8}\cmidrule(lr){9-11}
+     & & & & &
+    time [s] & throughput [S/s] & rel. &
+    time [s] & throughput [S/s] & rel. \\
+    \midrule
+    % Fine-grained sameA (kernel-level)
+    Fine    & 1 & 1 & 256 & 256 & 0.0004 & 574688.16 & 1.00 & 0.0003 & 928660.05 & 1.00 \\
+    Fine    & 1 & 2 & 256 & 256 & 0.0004 & 659297.62 & 1.15 & 0.0003 &1001956.95 & 1.08 \\
+    Fine    & 1 & 4 & 256 & 256 & 0.0004 & 656199.88 & 1.14 & 0.0003 & 956859.11 & 1.03 \\
+    Fine   & 1 & 8 & 256 & 256 & 0.0005 & 567680.32 & 0.99 & 0.0003 & 965429.33 & 1.04 \\
+    \midrule
+     % Coarse-grained manyA (task-level)
+    Coarse & 1 & 1 & 256 & 256 & 0.7576 &   337.93 & 1.00 & 0.3810 &   671.98 & 1.00 \\
+    Coarse & 2 & 1 & 256 & 256 & 0.6000 &   426.68 & 1.26 & 0.2783 &   919.85 & 1.37 \\
+    Coarse  & 4 & 1 & 256 & 256 & 0.5647 &   453.32 & 1.34 & 0.2314 &  1106.38 & 1.65 \\
+    Coarse & 8 & 1 & 256 & 256 & 0.5913 &   432.95 & 1.28 & 0.2265 &  1130.48 & 1.68 \\
+    \midrule
+    % Hybrid manyA (task x kernel)
+    Hybrid  & 2 & 2 & 256 & 256 & 0.6574 &   389.42 & 1.00 & 0.2788 &   918.33 & 1.00 \\
+    Hybrid  & 2 & 4 & 256 & 256 & 0.6200 &   412.93 & 1.06 & 0.2794 &   916.15 & 1.00 \\
+    Hybrid  & 4 & 2 & 256 & 256 & 0.5076 &   504.31 & 1.30 & 0.2305 &  1110.56 & 1.21 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Throughput and relative performance of coarse-grained,
+           fine-grained, and hybrid parallelism on Apple M1 (8-core)
+           and Apple M4 Pro (12-core) for $n=256$, $S=256$.
+           Relative performance (“rel.”) is normalized to 1.0 at
+           \texttt{outer=1, inner=1} (or the first configuration) for each
+           test type and machine.}
+  \label{tab:hybrid-bench-m1-m4}
+\end{table}
+
 
 \section{Discussion}
 \label{sec:headings}
@@ -87,83 +135,6 @@ The results underpin patterns observed in industry where the biggest performance
 \label{sec:headings}
 Overall, the project and benchmark suite was successfully scoped, designed, and implemented to address the original problem statement: evaluating the effects of varying parallelism strategies in matrix computation workloads commonly employed in the quantitative finance industry. The high-level design of the benchmark suite consists of two performance test modules, a command line interface to control them, and a bash script to configure and execute a series of variable performance tests. Running the benchmark suite on two machines, a 2020 Apple M1 with eight CPU cores and a 2024 Apple M4 Pro with twelve CPU cores, demonstrate that workloads leveraging fine grained parallelism saturate quickly, while course grained workloads continue to scale with additional CPU cores. The results underpin patterns observed in industry where the biggest performance gains are made by tuning concurrency to workload structure and available hardware. While time did not permit their inclusion in the initial scope of this project, in the future, there are a number of topics I would like to explore further: comparing the benchmark with the Rust implemented equivalent, latest Python equivalent (currently unstable release), optimization with cuPy, and further investigation into the nuance of the hybrid case. 
 
-
-
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
-
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
-
-\subsection{Figures}
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-
-\begin{figure}
-	\centering
-	\fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-
-
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
-
-
 \bibliographystyle{unsrtnat}
-\bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
-
-
-%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
-% \begin{thebibliography}{1}
-
-% 	\bibitem{kour2014real}
-% 	George Kour and Raid Saabne.
-% 	\newblock Real-time segmentation of on-line handwritten arabic script.
-% 	\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-% 			International Conference on}, pages 417--422. IEEE, 2014.
-
-% 	\bibitem{kour2014fast}
-% 	George Kour and Raid Saabne.
-% 	\newblock Fast classification of handwritten on-line arabic characters.
-% 	\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-% 			International Conference of}, pages 312--318. IEEE, 2014.
-
-% 	\bibitem{hadash2018estimate}
-% 	Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-% 	Jacovi.
-% 	\newblock Estimate and replace: A novel approach to integrating deep neural
-% 	networks with existing applications.
-% 	\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-% \end{thebibliography}
-
-
+\bibliography{references} 
 \end{document}
