@@ -49,11 +49,11 @@ plt.plot(
 
 plt.xlabel(r"Parallel degree $p$ (outer or inner)")
 plt.ylabel(r"Relative throughput ($\times$ baseline at $p=1$)")
-plt.title("Relative speedup of coarse vs fine grained parallelism")
+plt.title("Figure 1: Relative speedup compared to baseline")
 plt.xticks(p_vals)
 plt.grid(True, linestyle=":")
 plt.legend()
 plt.tight_layout()
 
-plt.show()
-plt.savefig("benchmark_speedup_relative.png")
+#plt.show()
+plt.savefig("../docs/reports/parallel_matrix_ops/benchmark_speedup_relative.png")
