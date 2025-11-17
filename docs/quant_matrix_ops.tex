@@ -66,16 +66,27 @@ This paper explores fine, course, and hybrid forms of parallelism in matrix comp
 In the design of the benchmark suite, I followed an ethos of simulating real life applications, while using abstraction and simplification where it was reasonable and practical to do so. I designed and implemented two modules to benchmark the effects of variable parallelism strategies in matrix computation workloads commonly employed in quantitative finance.
 
 \subsection{Design}
-The high-level design of the benchmark suite consists of two performance test modules, a command line interface to control them, and a bash script to configure and execute a series of variable performance tests. The first module, $sameA$, models fine-grained parallelism where a single matrix ($sameA$) is factored once and reused to solve multiple right hand side (RHS) equations; this mirrors common workflows such as Greek calculation and portfolio risk attribution [1][2]. The second module, $manyA$, simulates course-grained, task-level parallelism and is responsible for solving multiple independent matrices, emulating many-market scenarios such as Monte Carlo engines [1]. To run the benchmark suite, I opted for a configurable command line interface to instantiate both individual performance tests and the collective benchmark suite. This allowed for ease of implementation while promoting flexibility and future extensibility. 
+The high-level design of the benchmark suite consists of two performance test modules, a command line interface to control them, and a bash script to configure and execute a series of variable performance tests. The first module, $sameA$, models fine-grained parallelism where a single matrix ($sameA$) is factored once and reused to solve multiple right hand side equations; this emulates workloads such as Greek calculation and portfolio risk attribution [1][2]. The second module, $manyA$, simulates course-grained, task-level parallelism and is responsible for solving multiple independent matrices ($manyA$); this emulates many-market scenarios such as Monte Carlo engines [1]. To run the benchmark suite, I opted for a configurable command line interface to instantiate both individual performance tests and the collective benchmark suite. This allowed for ease of implementation while promoting flexibility and future extensibility. 
 
 
 \subsection{Implementation}
 The benchmark suite is implemented in Python3 and leverages SciPy to make use of the underlying BLAS kernel for matrix operations. I opted for Python to focus on workload emulation instead of low-level or algorithmic optimizations via Cuda or OpenMP. This was a notable tradeoff, but a deliberate choice, as the chosen stack better emulates the development environment of a typical quantitative researcher where vendor-optimized kernels such as BLAS and LAPACK are the standard backend []. 
-Both modules, $sameA$ and $manyA$, leverage the $spd$ helper to construct random symmetric positive definite (SPD) matrix(s) of size NxN using the formula  $ A = X^{T} X + \lambda I$. The $sameA$ module constructs a single SPD matrix $A$, factorizes it once, and solves $A x = b$ for $S$ right hand sides using $inner$ BLAS kernel threads. The $manyA$ module constructs and factorizes $S$ SPD matrices and solves  $A_s x_s = b$ where $b$ is a vector of ones. Parallelism in $manyA$ comes from using $ProcessPoolExecutor$ to distribute tasks across $outer$ worker processes and assigning $inner$ per process BLAS kernel threads. Having both $inner$ and $outer$ configurable parameters enables the $manyA$ module to express both course and hybrid parallelism. 
+
+Both modules, $sameA$ and $manyA$, leverage the $spd$ helper to construct random symmetric positive definite (SPD) matrix(s) of size $n$ x $n$ using the formula  $ A = X^{T} X + \lambda I$. The $sameA$ module constructs a single SPD matrix $A$, factorizes it once, and solves $A x = b$ for $S$ right hand sides using $inner$ BLAS kernel threads. The $manyA$ module constructs and factorizes $S$ SPD matrices and solves  $A_s x_s = b$ where $b$ is a vector of ones. Parallelism in $manyA$ comes from using $ProcessPoolExecutor$ to distribute tasks across $outer$ worker processes and assigning $inner$ per process BLAS kernel threads. Having both $inner$ and $outer$ configurable parameters enables the $manyA$ module to express both course and hybrid parallelism. 
 
 \section{Results}
 \label{sec:headings}
-Table 1~\ref{tab:table1}. below details the results of running the benchmark suite configured for 256x256 matrix and 256 scenarios on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in <Figure Y>, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
+Table 1 ~\ref{tab:table1} below details the results of running the benchmark suite configured for 256x256 matrix and 256 scenarios on two machines: a 2020 Apple M1 with eight CPU Cores and a 2024 Apple M4 Pro with twelve CPU Cores. As illustrated in Figure 1, performance improvements for fine grained parallelism quickly plateau, and we see near identical scaling patterns on both machines, despite core count differences. In these runs, there is a slight performance boost increasing from one to two BLAS threads, but it degrades thereafter. Course grained parallelism scaled up to four processes on the M1, and degraded thereafter. On the M4 Pro, it scaled almost linearly up to eight. For course grained runs, throughput roughly doubles from the M1 to the M4 Pro. Hybrid parallelism provides modest gains over coarse grained parallelism on the M1 machine, but comparatively underperforms on the M4 Pro.
+
+
+\begin{figure}[H]  
+  \centering
+  \includegraphics[width=1\textwidth]{RelativeSpeedup.png}
+  \caption{Relative speedup of coarse (\texttt{manyA}) and fine
+  (\texttt{sameA}) workloads on a 2020 Apple M1 (8-core) and a 2024 Apple M4 Pro
+  (12-core). Throughput for each curve is normalized to the $p=1$ configuration.}
+  \label{fig:relative-speedup}
+\end{figure}
 
 
 \begin{table}[H]
@@ -112,43 +123,17 @@ Table 1~\ref{tab:table1}. below details the results of running the benchmark sui
     Hybrid  & 4 & 2 & 256 & 256 & 0.5076 &   504.31 & 1.30 & 0.2305 &  1110.56 & 1.21 \\
     \bottomrule
   \end{tabular}
-  \caption{Throughput and relative performance of coarse-grained,
-           fine-grained, and hybrid parallelism on Apple M1 (8-core)
-           and Apple M4 Pro (12-core) for $n=256$, $S=256$.
-           Relative performance (“rel.”) is normalized to 1.0 at
-           \texttt{outer=1, inner=1} (or the first configuration) for each
+  \caption{Throughput and relative performance of fine,
+           course, and hybrid parallelism on Apple M1 (8-core)
+           and Apple M4 Pro (12-core) Relative performance (“rel.”) is normalized to 1.0 at \texttt{outer=1, inner=1} for each
            test type and machine.}
   \label{tab:hybrid-bench-m1-m4}
 \end{table}
 
-\begin{figure}[H]
-\centering
-
-% ---- Figure 1 placeholder ----
-\begin{minipage}{0.45\textwidth}
-\centering
-\fbox{\rule{0pt}{1in}\rule{0.9\textwidth}{0pt}}
-\caption*{\textbf{Figure 1.} Placeholder Plot}
-\label{fig:placeholder1}
-\end{minipage}
-\hfill
-% ---- Figure 2 placeholder ----
-\begin{minipage}{0.45\textwidth}
-\centering
-\fbox{\rule{0pt}{1in}\rule{0.9\textwidth}{0pt}}
-\caption*{\textbf{Figure 2.} Placeholder Plot}
-\label{fig:placeholder2}
-\end{minipage}
-
-\caption{Placeholder side-by-side figures for upcoming plots.}
-\label{fig:two-side-by-side}
-\end{figure}
-
-
 
 \section{Discussion}
 \label{sec:headings}
-The results underpin patterns observed in industry where the biggest performance gains are made by tuning concurrency to workload structure and available hardware. The results of the fine-grained benchmarks are unsurprising, and highlight that after initial factorization, the remaining computation is dominated by memory-bound tasks rather than CPU-bound tasks. This demonstrates that the BLAS kernel is almost entirely bandwidth limited, and additional threads only create more contention. The results of course-grained benchmarks are more pronounced. On both machines, scenario-parallel computations scale well with core count. This is especially pronounced on the M4 Pro machine, and highlights architecture improvements introduced in the generation such as higher memory bandwidth and larger shared caches <ref>. The results from the hybrid benchmarks are more nuanced, and appear to highlight differences in architecture and where memory pressure first becomes limiting.
+The results underpin patterns observed in industry, where the biggest performance gains are made by tuning concurrency to both workload structure and available hardware. The results of the fine-grained benchmarks are unsurprising and highlight that after initial factorization, the remaining computation is dominated by memory-bound tasks rather than CPU-bound tasks. This demonstrates that the BLAS kernel is almost entirely bandwidth limited, and additional threads only create more contention. The results of the course-grained benchmarks are more pronounced. On both machines, task level parallelism scale well with core count. This is especially pronounced on the M4 Pro machine, and highlights architecture improvements introduced in the generation such as higher memory bandwidth and larger shared caches <ref>. The results from the hybrid benchmarks are more nuanced and appear to highlight architectural differences such as where memory pressure first becomes limiting. Further investigation and profiling is needed to better understand the hybrid case.  
 
 
 \section{Conclusions and Future Work}
