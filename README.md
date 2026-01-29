@@ -23,7 +23,6 @@ int[] dist = bf.getSolution();
 Efficient algorithms for matrix mulitplications. 
 - See [docs](./docs/planning/mat-ops.md) for project planning and log 
 - See [reports](./docs/reports/parallel_matrix_ops/) for LaTex report
-- See [Google Docs](https://docs.google.com/document/d/1kvtlFZ7dZELGDH14w0UZi3Igh39EzcXSMgawBmVN8Jo/edit?usp=sharing) captures initial content draft and revision history 
 
 #### Hybrid Bench
 ```bash
